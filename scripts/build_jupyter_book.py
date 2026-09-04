@@ -79,9 +79,21 @@ NOTEBOOKS: dict[str, dict] = {
             md(
                 """## Goal
 
+- Shell Programming, 셸 명령 언어와 Bash 인터프리터의 관계를 설명한다.
+- `sh`와 Bash 전용 스크립트의 차이를 실행으로 확인한다.
 - 현재 셸과 Bash 버전을 확인한다.
 - 실습 파일을 격리된 임시 디렉터리에서만 만든다.
 - 명령의 출력과 종료 상태를 함께 관찰한다."""
+            ),
+            md(
+                """## 핵심 용어
+
+- **Shell Programming**: 셸 명령 언어와 운영체제 도구로 작업을 자동화하는 방식
+- **Shell Command Language**: 명령, 변수, 파이프, 조건문과 반복문을 표현하는 언어
+- **Bash**: 셸 명령 언어를 해석하는 GNU의 셸 프로그램. `sh` 호환 문법과 Bash 확장 문법을 함께 제공
+- **Terminal**: 키 입력과 화면 출력을 셸에 연결하는 프로그램
+
+“Bash는 언어가 아니다”라는 말은 Bash를 Python 같은 범용 언어와 동일시하지 말라는 뜻으로 이해해야 합니다. 더 정확히는 **Bash는 셸 명령 언어를 구현한 인터프리터이며, 동시에 자신만의 확장 문법을 제공한다**고 설명합니다."""
             ),
             md(
                 """## Setup
@@ -89,16 +101,45 @@ NOTEBOOKS: dict[str, dict] = {
 아래 Python 셀은 매 실습마다 새로운 임시 디렉터리를 만들고 `BASH_LAB_DIR` 환경 변수에 저장합니다. 이후 Bash 셀은 이 경로 안에서만 파일을 생성합니다."""
             ),
             setup_cell("00"),
-            md("## Steps\n\n### 1. 실행 환경 확인"),
+            md("## Steps\n\n### 1. `sh`와 Bash 인터프리터 확인"),
             code(
                 '''%%bash
 set -euo pipefail
+printf 'sh path: %s\\n' "$(command -v sh)"
 printf 'Bash path: %s\\n' "$(command -v bash)"
 bash --version | head -n 1
 printf 'Lab directory: %s\\n' "$BASH_LAB_DIR"
 test -d "$BASH_LAB_DIR"'''
             ),
-            md("### 2. 출력과 오류 분리"),
+            md(
+                """### 2. 공통 문법과 Bash 확장 구분
+
+첫 명령은 `sh`와 Bash가 모두 해석할 수 있는 문법입니다. 배열은 Bash 확장 기능이므로 `sh` 스크립트에 넣지 않고 Bash 인터프리터를 명시해야 합니다."""
+            ),
+            code(
+                '''%%bash
+set -euo pipefail
+sh -c 'name=student; printf "sh: hello %s\\n" "$name"'
+bash -c 'name=student; printf "Bash: hello %s\\n" "$name"'
+bash -c 'items=(alpha "two words"); printf "Bash array count=%s\\n" "${#items[@]}"'
+
+if sh -c 'items=(alpha beta)' 2>/dev/null; then
+  printf '현재 sh 구현은 배열 문법을 허용하지만 POSIX 이식성은 없습니다.\\n'
+else
+  printf '현재 sh 구현은 Bash 배열 문법을 거부했습니다.\\n'
+fi'''
+            ),
+            md(
+                """직접 실행하는 파일의 첫 줄은 필요한 인터프리터를 선언합니다.
+
+```sh
+#!/bin/sh                 # POSIX sh 문법만 사용
+#!/usr/bin/env bash       # Bash 확장 문법 사용 가능
+```
+
+`.sh` 확장자가 인터프리터를 정하는 것은 아닙니다. shebang 또는 `bash script.sh`처럼 앞에 지정한 프로그램이 결정합니다. 어떤 시스템에서는 `/bin/sh`가 Bash를 가리켜 배열을 우연히 허용할 수도 있지만, 배열은 POSIX `sh` 문법이 아니므로 이식 가능한 `sh` 스크립트에서는 사용하지 않습니다."""
+            ),
+            md("### 3. 출력과 오류 분리"),
             code(
                 '''%%bash
 set -u
@@ -107,7 +148,7 @@ printf '오류 출력 예시\\n' >&2
 bash -c 'exit 7' || status=$?
 printf '관찰한 종료 상태=%s\\n' "${status:-0}"'''
             ),
-            md("### 3. 실습 파일 생성"),
+            md("### 4. 실습 파일 생성"),
             code(
                 '''%%bash
 set -euo pipefail
@@ -118,7 +159,9 @@ cat "$BASH_LAB_DIR/state.txt"'''
             md(
                 """## Checks
 
-- Bash 실행 경로와 버전이 출력되었는가?
+- `sh`와 Bash 실행 경로, Bash 버전이 출력되었는가?
+- 공통 문법은 두 인터프리터에서 실행되고 Bash 배열은 Bash에서 정상 실행되었는가?
+- 현재 `sh`가 배열을 허용하더라도 그것이 POSIX 이식성을 의미하지 않는 이유를 설명할 수 있는가?
 - 실패한 명령의 종료 상태가 `7`로 표시되었는가?
 - 생성한 파일이 `BASH_LAB_DIR` 안에 있는가?"""
             ),
