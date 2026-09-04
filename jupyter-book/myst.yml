@@ -1,0 +1,35 @@
+version: 1
+
+project:
+  id: 7eeed814-0493-4c2d-a32b-8a252e282957
+  title: Bash Shell Programming 실습 교재
+  description: 보안엔지니어를 위한 실행 중심 Bash Jupyter Book
+  keywords:
+    - bash
+    - shell scripting
+    - security automation
+    - jupyter book
+  authors:
+    - name:
+        literal: zxz3650
+  github: zxz3650/Bash-shell-programing
+  toc:
+    - file: index.md
+    - title: 기초와 판단
+      children:
+        - file: labs/00-orientation-and-safety.ipynb
+        - file: labs/01-when-to-use-bash.ipynb
+        - file: labs/02-arguments-variables-arrays.ipynb
+    - title: 제어와 데이터 처리
+      children:
+        - file: labs/03-conditions-loops-functions.ipynb
+        - file: labs/04-files-permissions-pipelines.ipynb
+        - file: labs/05-text-processing.ipynb
+    - title: 운영과 안전한 자동화
+      children:
+        - file: labs/06-system-inspection-secure-scripting.ipynb
+        - file: labs/07-automation-testing.ipynb
+        - file: labs/08-capstone-triage-collector.ipynb
+
+site:
+  template: book-theme

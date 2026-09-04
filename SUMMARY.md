@@ -14,4 +14,6 @@
 * [10. 프로그램 구조화](10-program-architecture.md)
 * [11. 병렬 작업과 대량 처리](11-parallel-jobs.md)
 * [12. Bash 활용 종합 프로젝트](12-capstone.md)
+* [실습용 Jupyter Book](jupyter-book/index.md)
+  * [실습 목록과 운영 방법](jupyter-book/labs/README.md)
 * [부록. 명령어 요약](appendix-command-cheatsheet.md)
