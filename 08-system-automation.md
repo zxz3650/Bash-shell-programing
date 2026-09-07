@@ -4,6 +4,13 @@
 
 반복되는 점검과 수집 작업을 옵션, 로그, dry-run을 갖춘 명령줄 도구로 만듭니다.
 
+## 학습 순서
+
+1. [08-1. CLI·설정 우선순위·로그](08-system-automation/08-1-cli-configuration.md)
+2. [08-2. 비대화형 실행·예약·잠금](08-system-automation/08-2-scheduling-locks.md)
+
+환경 변수와 옵션 중 무엇이 우선인가, 도움말과 사용 오류는 같은 상태인가, 작업이 겹치면 어떻게 되는가를 먼저 생각합니다. 노트북 07로 자동화의 상태 계약을 검증한 뒤 Linux 환경에서 예약·잠금 설정을 학습합니다. 스케줄을 실제 등록하는 것과 설정 예제를 읽는 것을 구분합니다.
+
 {% hint style="info" %}
 ## 🧭 학습 목표
 
@@ -51,7 +58,7 @@ readonly config_file="$script_dir/config.env"
 log() {
     local level=$1
     shift
-    printf '%s\t%s\t%s\n' "$(date -Is)" "$level" "$*" >&2
+printf '%s\t%s\t%s\n' "$(date -u '+%Y-%m-%dT%H:%M:%SZ')" "$level" "$*" >&2
 }
 ```
 

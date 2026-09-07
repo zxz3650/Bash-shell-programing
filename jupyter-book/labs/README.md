@@ -16,6 +16,14 @@
 
 ## 수업 운영 권장안
 
+추가 심화 실습은 다음과 같습니다. 기존 번호를 보존했으므로 교안 09~11장은 해당 번호의 노트북을 사용하고, 교안 12장은 노트북 08과 저장소 프로젝트를 연결합니다.
+
+| 번호 | 주제 | 노트북 | 바로 실행 |
+|---|---|---|---|
+| 09 | 오류 전파와 종료 상태 | [보기](https://github.com/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/09-error-contracts.ipynb) | [Colab](https://colab.research.google.com/github/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/09-error-contracts.ipynb) |
+| 10 | 모듈과 함수 계약 | [보기](https://github.com/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/10-modules-contracts.ipynb) | [Colab](https://colab.research.google.com/github/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/10-modules-contracts.ipynb) |
+| 11 | 제한된 병렬 처리 | [보기](https://github.com/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/11-bounded-parallel.ipynb) | [Colab](https://colab.research.google.com/github/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/11-bounded-parallel.ipynb) |
+
 - 강사는 먼저 예상 결과를 질문한 뒤 코드 셀을 실행합니다.
 - 학생은 실행 결과를 확인하고 코드의 한 부분을 바꾸어 다시 실행합니다.
 - 각 노트북의 `Checks`를 통과한 뒤 다음 실습으로 이동합니다.

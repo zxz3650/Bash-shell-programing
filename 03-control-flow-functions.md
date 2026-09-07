@@ -1,5 +1,7 @@
 # 03-1. 조건문, 반복문과 함수
 
+이 페이지는 이전 주소를 보존한 요약입니다. 새 상세 학습은 [03-6 조건문](03-bash-basics/03-6-conditions.md), [03-7 반복문](03-bash-basics/03-7-loops.md), [03-8 함수](03-bash-basics/03-8-functions.md) 순서로 진행합니다. 아래 조각 코드는 file·role·ticket 등의 입력을 먼저 준비해야 하며 stat -c는 GNU/Linux 전용입니다.
+
 {% hint style="info" %}
 ## 🧭 학습 목표
 

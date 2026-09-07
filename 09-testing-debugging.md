@@ -4,6 +4,13 @@
 
 구문 검사, 정적 분석, 서식 검사와 동작 테스트를 결합해 스크립트 변경을 검증합니다.
 
+## 학습 순서와 실습
+
+1. [09-1. 종료 상태·errexit·추적](09-testing-debugging/09-1-errors-tracing.md)
+2. [09-2. 테스트 설계·품질 검사](09-testing-debugging/09-2-tests-quality.md)
+
+set -e가 모든 오류를 막는지, bash -n 성공이 올바른 결과를 의미하는지, 테스트가 원본 보존도 확인하는지 질문합니다. [노트북 09](jupyter-book/labs/09-error-contracts.ipynb)와 `bash tests/test-course.sh`로 실행 결과를 검증합니다.
+
 {% hint style="info" %}
 ## 🧭 학습 목표
 
@@ -83,7 +90,10 @@ bats test/
 ## 권장 검사 순서
 
 ```bash
-bash -n scripts/*.sh
+for script in scripts/*.sh; do
+    [[ -e $script ]] || continue
+    bash -n "$script" || break
+done
 shfmt -d scripts test
 shellcheck scripts/*.sh test/*.bats
 bats test/

@@ -702,6 +702,119 @@ printf 'all capstone checks passed\\n' ''
 }
 
 
+NOTEBOOKS.update({
+    "09-error-contracts.ipynb": notebook(
+        "09. 오류 전파와 종료 상태 계약",
+        [
+            md("## Goal\n\nset -e의 조건부 호출 예외를 재현하고, stdout·stderr·종료 상태를 독립적으로 검증한다. [교안 09-1](../../09-testing-debugging/09-1-errors-tracing.md)과 연결된다."),
+            md("## Setup\n\n새 임시 폴더에서 합성 출력만 사용한다. 예상 실패는 if로 포착하여 노트북 전체 실행은 성공하도록 구성한다."),
+            setup_cell("09"),
+            md("## Steps\n\n### 1. 조건에서 호출된 함수\n\n예상: false 이후에도 continued와 reported success가 출력된다. -e가 모든 문맥에서 동작하지 않음을 확인한다."),
+            code('''%%bash
+set -u
+observed=$(bash -e -c 'work() { false; printf "continued\\n"; }; if work; then printf "reported success\\n"; fi')
+printf '%s\\n' "$observed"
+[[ $observed == $'continued\\nreported success' ]]'''),
+            md("### 2. 명시적 실패 전달\n\n예상: 실패 상태를 return으로 전달하므로 failure만 출력된다."),
+            code('''%%bash
+set -u
+observed=$(bash -e -c 'work() { false || return 1; printf "unreachable\\n"; }; if work; then printf "success\\n"; else printf "failure\\n"; fi')
+printf '%s\\n' "$observed"
+[[ $observed == failure ]]'''),
+            md("### 3. 세 통로 검사"),
+            code('''%%bash
+set -u
+status=0
+bash -c 'printf "data\\n"; printf "diagnostic\\n" >&2; exit 7' > "$BASH_LAB_DIR/out" 2> "$BASH_LAB_DIR/err" || status=$?
+[[ $status == 7 ]] || exit 1
+[[ $(< "$BASH_LAB_DIR/out") == data ]] || exit 1
+[[ $(< "$BASH_LAB_DIR/err") == diagnostic ]] || exit 1
+printf 'stdout=data stderr=diagnostic status=%s\\n' "$status"'''),
+            md("## Checks\n\n- 조건부 호출에서 -e만 의존한 결과와 명시적 return 결과가 다른가?\n- 상태 7을 오류 출력과 별도로 검증했는가?\n- exit 7을 exit 3으로 바꾸면 마지막 검사가 실패하는가? 원래 코드로 복구하고 재실행한다."),
+            md("## Next Steps\n\n검증할 함수를 라이브러리로 분리하고 source 시 부수 효과가 없는지 확인한다."),
+            cleanup_cell(),
+        ],
+    ),
+    "10-modules-contracts.ipynb": notebook(
+        "10. 함수 라이브러리와 호출 계약",
+        [
+            md("## Goal\n\n정의와 호출을 분리하고, stdin → stdout 데이터 변환 함수의 계약을 시험한다. [교안 10-1](../../10-program-architecture/10-1-modules-contracts.md)과 연결된다."),
+            md("## Setup\n\n실습 폴더 안에 라이브러리를 만든다. source는 현재 Bash 셀에서만 유지되므로 사용하는 셀마다 로드한다."),
+            setup_cell("10"),
+            md("## Steps\n\n### 1. 부수 효과 없는 라이브러리 작성"),
+            code('''%%bash
+set -euo pipefail
+cat > "$BASH_LAB_DIR/labels.sh" <<'BASH'
+classify() {
+    (( $# == 1 )) || return 2
+    case $1 in
+        INFO) printf 'normal\\n' ;;
+        ERROR) printf 'review\\n' ;;
+        *) printf 'unsupported level\\n' >&2; return 2 ;;
+    esac
+}
+BASH
+bash -n "$BASH_LAB_DIR/labels.sh"
+observed=$(source "$BASH_LAB_DIR/labels.sh")
+[[ -z $observed ]]
+printf 'source emitted no data\\n' '''),
+            md("### 2. 함수 계약 검사"),
+            code('''%%bash
+set -euo pipefail
+source "$BASH_LAB_DIR/labels.sh"
+[[ $(classify INFO) == normal ]]
+[[ $(classify ERROR) == review ]]
+status=0
+classify DEBUG > "$BASH_LAB_DIR/out" 2> "$BASH_LAB_DIR/err" || status=$?
+[[ $status == 2 && ! -s $BASH_LAB_DIR/out && -s $BASH_LAB_DIR/err ]]
+printf 'INFO=normal ERROR=review DEBUG=status2\\n' '''),
+            md("### 3. 동적 스코프 관찰\n\n예상: 내부 호출은 caller의 local 값을 읽는다. 재사용 함수는 값을 인수로 전달하는 방식으로 고쳐 본다."),
+            code('''%%bash
+set -euo pipefail
+show_label() { printf '%s\\n' "$label"; }
+caller() { local label=local_value; show_label; }
+label=global_value
+[[ $(caller) == local_value ]]
+[[ $label == global_value ]]
+printf 'caller=local_value parent=global_value\\n' '''),
+            md("## Checks\n\n- source만 했을 때 함수 호출 결과가 출력되지 않는가?\n- 정상 데이터와 오류 진단이 분리되는가?\n- local 값이 내부 호출에서 보이는 이유를 Python 스코프와 비교할 수 있는가?"),
+            md("## Next Steps\n\n함수 계약을 유지하면서 독립 작업을 제한된 동시성으로 실행한다."),
+            cleanup_cell(),
+        ],
+    ),
+    "11-bounded-parallel.ipynb": notebook(
+        "11. 제한된 병렬 처리와 결과 검증",
+        [
+            md("## Goal\n\n동시성 1·2에서 같은 입력 순서의 결과가 나오는지 검증하고, 작업 하나의 실패를 전체 상태로 전달한다. [교안 11-1](../../11-parallel-jobs/11-1-bounded-workers.md)과 연결된다."),
+            md("## Setup\n\n저장소의 기준 구현을 노트북에 포함했다. 외부 연결 없이 임시 파일 세 개만 처리한다. wc -l은 개행 수를 세므로 모든 샘플은 개행으로 끝난다."),
+            setup_cell("11"),
+            md("## Steps\n\n### 1. 기준 구현과 입력 준비\n\n코드의 PID 배열, wait_batch, 입력 번호별 파일, 최종 병합을 찾아 설명한다."),
+            code("%%bash\nset -euo pipefail\ncat > \"$BASH_LAB_DIR/run-workers.sh\" <<'COURSE_WORKER'\n" + (ROOT / "examples/parallel/run-workers.sh").read_text(encoding="utf-8") + "COURSE_WORKER\nprintf 'a\\nb\\n' > \"$BASH_LAB_DIR/two words.txt\"\nprintf 'c\\n' > \"$BASH_LAB_DIR/one.txt\"\n: > \"$BASH_LAB_DIR/empty.txt\"\nbash -n \"$BASH_LAB_DIR/run-workers.sh\""),
+            md("### 2. 직렬과 병렬 비교\n\n예상: 입력 1은 2, 입력 2는 1, 입력 3은 0이다. 두 실행의 출력이 정확히 같아야 한다."),
+            code('''%%bash
+set -euo pipefail
+inputs=("$BASH_LAB_DIR/two words.txt" "$BASH_LAB_DIR/one.txt" "$BASH_LAB_DIR/empty.txt")
+bash "$BASH_LAB_DIR/run-workers.sh" 1 "${inputs[@]}" > "$BASH_LAB_DIR/serial.tsv"
+bash "$BASH_LAB_DIR/run-workers.sh" 2 "${inputs[@]}" > "$BASH_LAB_DIR/parallel.tsv"
+printf '1\\t2\\n2\\t1\\n3\\t0\\n' > "$BASH_LAB_DIR/expected.tsv"
+cmp "$BASH_LAB_DIR/serial.tsv" "$BASH_LAB_DIR/parallel.tsv"
+cmp "$BASH_LAB_DIR/expected.tsv" "$BASH_LAB_DIR/parallel.tsv"
+cat "$BASH_LAB_DIR/parallel.tsv"'''),
+            md("### 3. 일부 입력 실패\n\n예상: 상태 1, stdout은 비어 있음, stderr에는 실패 설명이 남음."),
+            code('''%%bash
+set -euo pipefail
+status=0
+bash "$BASH_LAB_DIR/run-workers.sh" 2 "$BASH_LAB_DIR/one.txt" "$BASH_LAB_DIR/missing" > "$BASH_LAB_DIR/out" 2> "$BASH_LAB_DIR/err" || status=$?
+[[ $status == 1 && ! -s $BASH_LAB_DIR/out && -s $BASH_LAB_DIR/err ]]
+printf 'failure propagated; partial report not emitted\\n' '''),
+            md("## Checks\n\n- 직렬·병렬 출력이 정확히 같은가?\n- 완료 순서 대신 입력 번호로 병합하는 이유를 설명할 수 있는가?\n- 동시성 0을 지정하면 사용 오류 2인가?\n- 실패한 작업이 있으면 부분 보고서를 최종 결과로 내보내지 않는가?"),
+            md("## Next Steps\n\n12장의 두 프로젝트에 요구사항·정답·실패 검증·설명 자료를 적용해 최종 제출한다."),
+            cleanup_cell(),
+        ],
+    ),
+})
+
+
 def main() -> None:
     LABS.mkdir(parents=True, exist_ok=True)
     for filename, data in NOTEBOOKS.items():

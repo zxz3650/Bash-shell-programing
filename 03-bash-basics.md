@@ -2,7 +2,28 @@
 
 ## 개요
 
-변수, 매개변수 확장, quoting과 배열을 학습하고 조건문·반복문·함수 문서로 확장합니다.
+명령 실행부터 변수·인용·배열·조건·반복·함수까지 단계별로 학습합니다. 아래 상세 절이 본 학습 경로이며, 이 페이지의 짧은 예제는 복습용입니다. Python의 객체·반환값·어휘적 스코프를 Bash의 문자열·종료 상태·동적 스코프와 구분합니다.
+
+## 학습 전 확인
+
+1. 출력이 없는 명령도 성공할 수 있는가?
+2. 공백을 포함한 값을 한 인수로 전달하려면 무엇이 필요한가?
+3. 함수의 return과 stdout은 같은 것인가?
+4. 파이프 안에서 바꾼 변수는 부모 셸에 남는가?
+
+## 학습 순서
+
+1. [03-1. 명령 실행과 종료 상태](03-bash-basics/03-1-execution-model.md)
+2. [03-2. 변수와 환경 변수](03-bash-basics/03-2-variables-environment.md)
+3. [03-3. 인용과 확장 순서](03-bash-basics/03-3-quoting-expansion.md)
+4. [03-4. 위치 인자와 배열](03-bash-basics/03-4-arguments-arrays.md)
+5. [03-5. 문자열과 산술식](03-bash-basics/03-5-strings-arithmetic.md)
+6. [03-6. 조건문과 case](03-bash-basics/03-6-conditions.md)
+7. [03-7. 반복문과 입력 스트리밍](03-bash-basics/03-7-loops.md)
+8. [03-8. 함수와 스코프](03-bash-basics/03-8-functions.md)
+9. [03-9. 문법 종합 실습](03-bash-basics/03-9-syntax-project.md)
+
+노트북 02·03으로 문법을 실행하고 마지막 절에서 이벤트 분류기를 완성합니다. [실습 연결표](course-guide.md)를 참고합니다.
 
 {% hint style="info" %}
 ## 🧭 학습 목표
@@ -32,7 +53,7 @@ env | grep '^LOG_LEVEL='
 
 ```bash
 name=${1:-student}
-: "${INPUT_FILE:?INPUT_FILE is required}"
+path='./reports/sample.log'
 base=${path##*/}
 extension=${base##*.}
 ```
@@ -90,4 +111,4 @@ grep "${grep_args[@]}" 'failed password' auth.log
 
 - 공백과 특수문자가 있는 값을 손실 없이 전달할 수 있다.
 - `${var:-default}`와 `${var:?message}`를 상황에 맞게 사용한다.
-- [`03-1. 조건문, 반복문과 함수`](03-control-flow-functions.md)로 제어 흐름을 구성할 수 있다.
+- [03-9. 문법 종합 실습](03-bash-basics/03-9-syntax-project.md)의 정상·실패 입력을 검증할 수 있다.

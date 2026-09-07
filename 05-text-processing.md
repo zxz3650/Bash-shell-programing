@@ -4,6 +4,16 @@
 
 표준 스트림과 파이프라인으로 로그를 필터링·정규화·집계하고 JSON을 구조적으로 처리합니다.
 
+## 학습 순서와 선행 지식
+
+04장의 스트림·파일 보존을 바탕으로 단계별 입력 형식과 종료 상태를 검증합니다.
+
+1. [05-1. 파이프라인과 grep](05-text-processing/05-1-pipelines-grep.md)
+2. [05-2. awk·sed·정렬·집계](05-text-processing/05-2-awk-sed-aggregation.md)
+3. [05-3. JSON과 데이터 계약](05-text-processing/05-3-json-data-contracts.md)
+
+학습 전 질문: 검색 결과가 없다는 것은 실행 오류인가? uniq 앞에 sort가 필요한 이유는 무엇인가? JSON을 cut으로 처리하면 어떤 입력에서 실패하는가? [노트북 05](jupyter-book/labs/05-text-processing.ipynb)의 고정 로그를 손으로 집계한 뒤 결과를 비교합니다. 아래 명령 조각의 auth.log·access.log 등은 해당 형식의 입력을 준비한 뒤 사용하는 복습 예제입니다.
+
 {% hint style="info" %}
 ## 🧭 학습 목표
 

@@ -4,6 +4,82 @@
 
 Windows WSL 2 또는 Linux에 Bash 실습 환경을 구성하고 명령 탐색, shebang, 종료 상태와 도움말 사용법을 익힙니다.
 
+## 학습 전 확인
+
+터미널 창, Bash 프로세스, .sh 파일을 구분할 수 있는지 [01장](01-bash-intro.md)에서 확인합니다. 아래 PowerShell 명령은 Windows에서, bash 명령은 Linux·WSL·macOS의 Bash에서 실행합니다.
+
+## 환경 선택과 설치
+
+| 환경 | 준비 | 이 교안에서의 범위 |
+|---|---|---|
+| Windows | WSL2 Ubuntu 설치 | Linux 명령까지 전체 실습 |
+| Linux | Bash·GNU 도구 확인 | 전체 실습 |
+| macOS | 기본 Bash 또는 별도 Bash | 공통 문법·프로젝트, Linux 전용 제외 |
+| Colab | 노트북 링크 열기 | 셀 실행, 영구 예약 작업 제외 |
+
+### Windows: PowerShell에서 WSL 준비
+
+관리자 PowerShell에서 실행하고 요청되면 재부팅합니다.
+
+```powershell
+wsl --install -d Ubuntu
+wsl --list --verbose
+```
+
+Ubuntu를 열어 사용자 계정을 만든 뒤 다음 Linux 명령을 실행합니다. 이미 WSL이 있다면 재설치하지 않고 배포판과 버전을 확인합니다. [Microsoft 공식 설치 안내](https://learn.microsoft.com/en-us/windows/wsl/install)를 기준으로 합니다.
+
+### Ubuntu: 과정 도구
+
+```bash
+sudo apt update
+sudo apt install bash git coreutils findutils grep gawk sed jq shellcheck bats shfmt python3-venv python3-pip
+bash --version
+```
+
+설치는 관리자 권한이 필요하지만 교재 실습은 일반 사용자로 진행합니다. 배포판 버전에 따라 패키지 제공 여부가 다를 수 있습니다. 설치 실패 시 해당 패키지와 배포판 버전을 먼저 확인합니다.
+
+### macOS: 실행 파일 구분
+
+```bash
+/bin/bash --version
+command -v bash
+```
+
+기본 /bin/bash는 보통 3.2 계열입니다. Homebrew를 사용하는 경우 다음 도구를 별도로 설치할 수 있습니다.
+
+```bash
+brew install bash jq shellcheck shfmt bats-core
+bash --version
+```
+
+설치 후에도 /bin/bash가 자동 교체되는 것은 아닙니다. `command -v bash`와 `type -a bash`로 실제 선택된 경로를 확인합니다. GNU stat -c·date -Is·sort -z와 Linux /proc·ss·ip 예제는 [호환성 표](appendix-references.md)를 참고합니다.
+
+## 저장소와 실습 폴더
+
+```bash
+git clone https://github.com/zxz3650/Bash-shell-programing.git
+cd Bash-shell-programing
+lab_dir=$(mktemp -d)
+printf 'practice directory=%s\n' "$lab_dir"
+```
+
+이미 저장소가 있다면 해당 폴더를 사용합니다. GitBook용 Markdown은 저장소에서 읽고, 파일 변경 실습은 별도의 lab_dir 안에서 진행합니다. 샘플 코드에서 lab_dir를 사용하면 같은 터미널의 앞 준비 블록을 먼저 실행해야 합니다.
+
+## JupyterLab 실습 환경
+
+저장소 루트에서 실행합니다.
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r jupyter-book/requirements.txt
+jupyter lab jupyter-book/labs
+```
+
+노트북의 Python 커널에서 `%%bash` 셀을 실행합니다. 각 Bash 셀은 새 프로세스이므로 `cd`나 셸 변수가 다음 셀로 이어지지 않습니다. 교재는 Python 셀에서 설정한 BASH_LAB_DIR와 파일로 상태를 전달합니다. Python 가상환경은 Python 패키지를 격리하며 Bash 자체를 가상화하지 않습니다.
+
+[실습 목록](jupyter-book/labs/README.md)의 Colab 링크를 사용하면 설치 없이 시작할 수 있습니다. Colab의 파일과 런타임은 영구 보존을 보장하지 않으므로 필요한 결과는 별도로 저장합니다.
+
 {% hint style="info" %}
 ## 🧭 학습 목표
 
@@ -32,7 +108,7 @@ ps -p "$$" -o pid,ppid,comm,args
 
 ## 명령 탐색 순서
 
-Bash는 명령을 alias, function, builtin, 실행 파일 등의 순서로 탐색합니다.
+alias는 입력을 읽을 때 치환되며 비대화형 셸에서는 기본적으로 확장되지 않습니다. 명령 실행은 함수·builtin·PATH의 실행 파일 등을 찾습니다. [03-1 실행 모델](03-bash-basics/03-1-execution-model.md)에서 두 단계를 구분합니다.
 
 ```bash
 type cd
@@ -50,14 +126,34 @@ command -v jq
 
 printf 'user=%s\n' "$(id -un)"
 printf 'host=%s\n' "$(hostname)"
-printf 'time=%s\n' "$(date -Is)"
+printf 'time=%s\n' "$(date -u '+%Y-%m-%dT%H:%M:%SZ')"
 ```
 
+위 내용을 실습 폴더의 `system_info.sh`로 저장한 뒤 그 폴더에서 실행합니다.
+
 ```bash
-chmod +x system_info.sh
+bash -n system_info.sh
+bash system_info.sh
+chmod u+x system_info.sh
 ./system_info.sh
 echo "$?"
 ```
+
+사용자·호스트·UTC 시각 세 행과 마지막 상태 0을 확인합니다. 값은 환경마다 달라집니다. bash로 파일을 읽어 실행할 때와 실행 권한을 주어 직접 실행할 때를 구분합니다.
+
+## 첫 실행 오류 해결
+
+| 증상 | 확인할 원인 | 조치 |
+|---|---|---|
+| command not found | 실행 파일·PATH | command -v·type 확인 |
+| Permission denied | 실행 권한·디렉터리 권한 | bash로 읽기 실행과 직접 실행 비교 |
+| bad interpreter 또는 CR 문자 | shebang·CRLF 줄바꿈 | UTF-8, LF로 저장 |
+| 파일 없음 | 현재 위치·상대 경로 | pwd와 실제 파일명 확인 |
+| 배열 구문 오류 | sh로 Bash 코드 실행 | bash 또는 올바른 shebang 사용 |
+
+## 환경 확인 제출
+
+OS 종류, Bash 경로·버전, Python 버전, Jupyter 커널 이름, 첫 실행의 상태를 기록합니다. 전체 환경 변수를 덤프하지 않습니다. `bash tests/test-course.sh`는 저장소 루트에서 제공 프로젝트를 검증합니다.
 
 첫 줄은 shebang이며 사용할 인터프리터를 지정합니다. 종료 상태 `0`은 일반적으로 성공, 그 외 값은 실패를 뜻합니다.
 
@@ -66,7 +162,7 @@ echo "$?"
 ```bash
 help printf        # Bash builtin
 man find           # 외부 명령 매뉴얼
-find --help        # 짧은 옵션 요약
+find --help        # GNU find의 옵션 요약, macOS는 man find 사용
 type -a command    # 명령의 정체 확인
 ```
 

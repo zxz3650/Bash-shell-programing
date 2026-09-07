@@ -30,6 +30,11 @@ project:
         - file: labs/06-system-inspection-secure-scripting.ipynb
         - file: labs/07-automation-testing.ipynb
         - file: labs/08-capstone-triage-collector.ipynb
+    - title: 오류·구조화·병렬 심화
+      children:
+        - file: labs/09-error-contracts.ipynb
+        - file: labs/10-modules-contracts.ipynb
+        - file: labs/11-bounded-parallel.ipynb
 
 site:
   template: book-theme

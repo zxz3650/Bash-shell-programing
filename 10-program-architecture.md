@@ -4,6 +4,13 @@
 
 한 파일에 뒤섞인 스크립트를 입력, 검증, 처리, 출력과 오류 처리 책임으로 나누어 유지 가능한 프로그램으로 구성합니다.
 
+## 학습 순서
+
+1. [10-1. main·라이브러리·함수 계약](10-program-architecture/10-1-modules-contracts.md)
+2. [10-2. Bash와 Python의 역할 분담](10-program-architecture/10-2-bash-python-boundary.md)
+
+source 시 실행되는 명령, 함수의 숨은 전역 의존성, 스트림 연결 계약을 확인합니다. [노트북 10](jupyter-book/labs/10-modules-contracts.ipynb)에서 라이브러리를 만들고 호출합니다. 제공 로그 보고서 프로젝트의 bin·lib 분리를 실제 사례로 읽습니다.
+
 {% hint style="info" %}
 ## 🧭 학습 목표
 

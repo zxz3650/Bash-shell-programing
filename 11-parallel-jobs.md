@@ -4,6 +4,13 @@
 
 백그라운드 작업, `wait`, `xargs -P`를 사용해 독립 작업을 제한된 동시성으로 처리하고 결과와 실패를 회수합니다.
 
+## 학습 순서
+
+1. [11-1. 제한된 동시성과 결과 회수](11-parallel-jobs/11-1-bounded-workers.md)
+2. [11-2. 결정적 출력과 성능 측정](11-parallel-jobs/11-2-determinism-performance.md)
+
+작업 시작과 완료, 입력 순서와 완료 순서, 동시성 증가와 실제 성능을 구분합니다. [노트북 11](jupyter-book/labs/11-bounded-parallel.ipynb)과 `examples/parallel/run-workers.sh`가 제한된 작업 실행의 기준 예제입니다.
+
 {% hint style="warning" %}
 병렬화 전에 직렬 버전의 정확성과 멱등성을 먼저 검증합니다. 여러 작업이 같은 파일을 수정하면 결과 순서와 데이터가 불안정해질 수 있습니다.
 {% endhint %}
@@ -15,6 +22,8 @@
 - 공백과 개행이 포함된 파일명을 안전하게 전달한다.
 
 ## 1. 백그라운드 작업 회수
+
+아래는 소수 입력에서 PID 회수만 설명하는 GNU/Linux 조각 예제이며 입력 수만큼 작업을 시작합니다. 대량 입력에는 상세 절의 동시성 제한 구현을 사용합니다.
 
 ```bash
 pids=()

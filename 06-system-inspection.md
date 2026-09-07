@@ -4,6 +4,13 @@
 
 프로세스 계보, `/proc`, 백그라운드 작업, 시그널과 로컬 네트워크 상태를 읽기 전용으로 조사합니다.
 
+## 학습 순서
+
+1. [06-1. 프로세스와 로컬 시스템 상태](06-system-inspection/06-1-processes-observation.md)
+2. [06-2. 백그라운드 작업·시그널·정리](06-system-inspection/06-2-jobs-signals.md)
+
+03장의 종료 상태와 04장의 임시 자원 처리를 연결합니다. 시작 성공과 완료 성공의 차이, PID 재사용, trap이 실행되지 않는 종료 상황을 먼저 생각합니다. [노트북 06](jupyter-book/labs/06-system-inspection-secure-scripting.ipynb)으로 로컬 상태를 읽습니다. 아래 /proc·ss·ip·ps --sort 예제는 Linux 전용이며 macOS 대안은 상세 절에서 설명합니다.
+
 {% hint style="info" %}
 ## 🧭 학습 목표
 
@@ -34,7 +41,7 @@ printf '\n'
 ## 백그라운드 작업
 
 ```bash
-long_task &
+sleep 1 &
 task_pid=$!
 printf 'pid=%s\n' "$task_pid"
 wait "$task_pid"
