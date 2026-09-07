@@ -21,7 +21,7 @@
 | 번호 | 주제 | 노트북 | 바로 실행 |
 |---|---|---|---|
 | 09 | 오류 전파와 종료 상태 | [보기](https://github.com/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/09-error-contracts.ipynb) | [Colab](https://colab.research.google.com/github/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/09-error-contracts.ipynb) |
-| 10 | 모듈과 함수 계약 | [보기](https://github.com/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/10-modules-contracts.ipynb) | [Colab](https://colab.research.google.com/github/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/10-modules-contracts.ipynb) |
+| 10 | 모듈과 함수의 입력과 출력 | [보기](https://github.com/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/10-modules-contracts.ipynb) | [Colab](https://colab.research.google.com/github/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/10-modules-contracts.ipynb) |
 | 11 | 제한된 병렬 처리 | [보기](https://github.com/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/11-bounded-parallel.ipynb) | [Colab](https://colab.research.google.com/github/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/11-bounded-parallel.ipynb) |
 
 - 강사는 먼저 예상 결과를 질문한 뒤 코드 셀을 실행합니다.

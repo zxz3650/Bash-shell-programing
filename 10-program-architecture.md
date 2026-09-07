@@ -6,10 +6,10 @@
 
 ## 학습 순서
 
-1. [10-1. main·라이브러리·함수 계약](10-program-architecture/10-1-modules-contracts.md)
+1. [10-1. 모듈 구성과 함수의 입력·출력](10-program-architecture/10-1-modules-contracts.md)
 2. [10-2. Bash와 Python의 역할 분담](10-program-architecture/10-2-bash-python-boundary.md)
 
-source 시 실행되는 명령, 함수의 숨은 전역 의존성, 스트림 연결 계약을 확인합니다. [노트북 10](jupyter-book/labs/10-modules-contracts.ipynb)에서 라이브러리를 만들고 호출합니다. 제공 로그 보고서 프로젝트의 bin·lib 분리를 실제 사례로 읽습니다.
+source 시 실행되는 명령, 함수의 숨은 전역 의존성, 프로그램 사이에 데이터를 전달하는 형식을 확인합니다. [노트북 10](jupyter-book/labs/10-modules-contracts.ipynb)에서 라이브러리를 만들고 호출합니다. 제공 로그 보고서 프로젝트의 bin·lib 분리를 실제 사례로 읽습니다.
 
 {% hint style="info" %}
 ## 🧭 학습 목표
@@ -39,7 +39,7 @@ main() {
 main "$@"
 ```
 
-## 2. 함수 계약
+## 2. 함수의 입력과 출력
 
 함수마다 입력 인수, stdout 형식, stderr 오류와 종료 상태를 문서화합니다. 전역 변수보다 `local` 변수를 사용하고 함수가 예상 밖의 디렉터리 변경이나 종료를 일으키지 않도록 합니다.
 
@@ -55,11 +55,11 @@ fi
 
 ## 4. 언어 전환 기준
 
-100줄은 절대 기준이 아니지만, 중첩 상태·복잡한 JSON·병렬 상태 공유·장기 실행 서비스가 나타나면 Python이나 Go로 핵심 로직을 옮길지 검토합니다.
+복잡한 JSON 처리, 여러 작업 사이의 상태 공유, 장기 실행 서비스가 필요해지면 Python이나 Go로 핵심 로직을 옮길지 검토합니다.
 
 ## 🧪 종합 실습
 
-기존 로그 분석 스크립트를 `parse_args`, `validate_input`, `analyze`, `render_report`, `main`으로 분리하고 각 함수의 계약을 작성합니다.
+기존 로그 분석 스크립트를 `parse_args`, `validate_input`, `analyze`, `render_report`, `main`으로 분리하고 각 함수의 입력 인수, 출력 형식, 종료 상태를 문서화합니다.
 
 ## ✅ 완료 기준
 

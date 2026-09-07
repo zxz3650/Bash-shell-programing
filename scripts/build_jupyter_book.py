@@ -93,7 +93,7 @@ NOTEBOOKS: dict[str, dict] = {
 - **Bash**: 셸 명령 언어를 해석하는 GNU의 셸 프로그램. `sh` 호환 문법과 Bash 확장 문법을 함께 제공
 - **Terminal**: 키 입력과 화면 출력을 셸에 연결하는 프로그램
 
-“Bash는 언어가 아니다”라는 말은 Bash를 Python 같은 범용 언어와 동일시하지 말라는 뜻으로 이해해야 합니다. 더 정확히는 **Bash는 셸 명령 언어를 구현한 인터프리터이며, 동시에 자신만의 확장 문법을 제공한다**고 설명합니다."""
+**Bash는 명령과 스크립트를 읽고 실행하는 셸 프로그램입니다.** Bash가 이해하는 문법으로 명령을 작성하고, 이를 파일에 저장해 실행하는 과정을 배웁니다."""
             ),
             md(
                 """## Setup
@@ -704,7 +704,7 @@ printf 'all capstone checks passed\\n' ''
 
 NOTEBOOKS.update({
     "09-error-contracts.ipynb": notebook(
-        "09. 오류 전파와 종료 상태 계약",
+        "09. 오류 전파와 종료 상태 확인",
         [
             md("## Goal\n\nset -e의 조건부 호출 예외를 재현하고, stdout·stderr·종료 상태를 독립적으로 검증한다. [교안 09-1](../../09-testing-debugging/09-1-errors-tracing.md)과 연결된다."),
             md("## Setup\n\n새 임시 폴더에서 합성 출력만 사용한다. 예상 실패는 if로 포착하여 노트북 전체 실행은 성공하도록 구성한다."),
@@ -721,7 +721,7 @@ set -u
 observed=$(bash -e -c 'work() { false || return 1; printf "unreachable\\n"; }; if work; then printf "success\\n"; else printf "failure\\n"; fi')
 printf '%s\\n' "$observed"
 [[ $observed == failure ]]'''),
-            md("### 3. 세 통로 검사"),
+            md("### 3. 정상 출력·오류 출력·종료 상태 검사"),
             code('''%%bash
 set -u
 status=0
@@ -736,9 +736,9 @@ printf 'stdout=data stderr=diagnostic status=%s\\n' "$status"'''),
         ],
     ),
     "10-modules-contracts.ipynb": notebook(
-        "10. 함수 라이브러리와 호출 계약",
+        "10. 함수 라이브러리의 입력과 출력",
         [
-            md("## Goal\n\n정의와 호출을 분리하고, stdin → stdout 데이터 변환 함수의 계약을 시험한다. [교안 10-1](../../10-program-architecture/10-1-modules-contracts.md)과 연결된다."),
+            md("## Goal\n\n정의와 호출을 분리하고, stdin → stdout 데이터 변환 함수의 출력과 종료 상태를 확인한다. [교안 10-1](../../10-program-architecture/10-1-modules-contracts.md)과 연결된다."),
             md("## Setup\n\n실습 폴더 안에 라이브러리를 만든다. source는 현재 Bash 셀에서만 유지되므로 사용하는 셀마다 로드한다."),
             setup_cell("10"),
             md("## Steps\n\n### 1. 부수 효과 없는 라이브러리 작성"),
@@ -758,7 +758,7 @@ bash -n "$BASH_LAB_DIR/labels.sh"
 observed=$(source "$BASH_LAB_DIR/labels.sh")
 [[ -z $observed ]]
 printf 'source emitted no data\\n' '''),
-            md("### 2. 함수 계약 검사"),
+            md("### 2. 함수의 출력과 종료 상태 검사"),
             code('''%%bash
 set -euo pipefail
 source "$BASH_LAB_DIR/labels.sh"
@@ -778,7 +778,7 @@ label=global_value
 [[ $label == global_value ]]
 printf 'caller=local_value parent=global_value\\n' '''),
             md("## Checks\n\n- source만 했을 때 함수 호출 결과가 출력되지 않는가?\n- 정상 데이터와 오류 진단이 분리되는가?\n- local 값이 내부 호출에서 보이는 이유를 Python 스코프와 비교할 수 있는가?"),
-            md("## Next Steps\n\n함수 계약을 유지하면서 독립 작업을 제한된 동시성으로 실행한다."),
+            md("## Next Steps\n\n함수의 입력·출력 형식을 유지하면서 독립 작업을 제한된 동시성으로 실행한다."),
             cleanup_cell(),
         ],
     ),
