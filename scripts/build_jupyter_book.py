@@ -7,6 +7,8 @@ import json
 import hashlib
 from pathlib import Path
 
+from chapter01_notebook import build_chapter01
+
 
 ROOT = Path(__file__).resolve().parents[1]
 LABS = ROOT / "jupyter-book" / "labs"
@@ -169,84 +171,7 @@ cat "$BASH_LAB_DIR/state.txt"'''
             cleanup_cell(),
         ],
     ),
-    "01-when-to-use-bash.ipynb": notebook(
-        "01. Bash를 선택하는 기준",
-        [
-            md(
-                """## Goal
-
-- 외부 명령 조합, 단순 텍스트, 종료 상태가 중심인 작업을 식별한다.
-- 복잡한 데이터 구조와 예외 처리가 필요한 작업은 Python으로 넘긴다.
-- 짧은 로그 파이프라인을 직접 구성한다."""
-            ),
-            md("## Setup"),
-            setup_cell("01"),
-            code(
-                '''%%bash
-set -euo pipefail
-cat > "$BASH_LAB_DIR/app.log" <<'EOF'
-2026-09-04T09:00:00Z INFO api started
-2026-09-04T09:01:00Z ERROR database timeout
-2026-09-04T09:02:00Z WARN retry scheduled
-2026-09-04T09:03:00Z ERROR database timeout
-2026-09-04T09:04:00Z ERROR invalid token
-EOF
-wc -l "$BASH_LAB_DIR/app.log"'''
-            ),
-            md("## Steps\n\n### 1. 기존 명령을 파이프로 조합"),
-            code(
-                '''%%bash
-set -euo pipefail
-grep ' ERROR ' "$BASH_LAB_DIR/app.log" \
-  | cut -d' ' -f3- \
-  | sort \
-  | uniq -c \
-  | sort -nr'''
-            ),
-            md(
-                """### 2. 선택 기준 적용
-
-위 작업은 행 단위 텍스트를 `grep`, `cut`, `sort`, `uniq`로 처리합니다. 별도 데이터 모델이 없고 각 단계의 입력·출력이 눈에 보이므로 Bash가 적합합니다.
-
-반대로 다음 요구가 추가되면 Python 전환을 검토합니다.
-
-- 중첩 JSON의 스키마 검증
-- 오류 유형별 복잡한 재시도 정책
-- 데이터베이스와 API를 함께 사용하는 장기 실행 서비스
-- 여러 모듈로 나뉘는 대규모 테스트 코드"""
-            ),
-            md("### 3. 판단표를 명령으로 표현"),
-            code(
-                '''%%bash
-set -euo pipefail
-choose_tool() {
-  local external_commands=$1 structured_data=$2 long_lived=$3
-  if [[ $external_commands == yes && $structured_data == no && $long_lived == no ]]; then
-    printf 'Bash\\n'
-  else
-    printf 'Python or another general-purpose language\\n'
-  fi
-}
-
-choose_tool yes no no
-choose_tool yes yes no
-choose_tool no yes yes'''
-            ),
-            md(
-                """## Checks
-
-아래 질문 중 앞의 세 항목에 대부분 `예`, 뒤의 두 항목에 `아니오`라면 Bash를 우선 검토합니다.
-
-1. 외부 명령 실행이 작업의 중심인가?
-2. 데이터가 파일 경로나 행 단위 텍스트인가?
-3. 짧은 실행 후 종료하는 자동화인가?
-4. 복잡한 객체·스키마·비즈니스 로직이 필요한가?
-5. 장시간 실행되는 서비스인가?"""
-            ),
-            md("## Next Steps\n\nBash가 적합한 작은 작업을 인자, 변수, 배열로 일반화합니다."),
-            cleanup_cell(),
-        ],
-    ),
+    "01-when-to-use-bash.ipynb": build_chapter01(md, code, setup_cell, notebook, ROOT),
     "02-arguments-variables-arrays.ipynb": notebook(
         "02. 인자, 변수, 배열과 안전한 인용",
         [

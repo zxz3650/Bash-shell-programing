@@ -32,11 +32,13 @@ Ubuntu를 열어 사용자 계정을 만든 뒤 다음 Linux 명령을 실행합
 
 ```bash
 sudo apt update
-sudo apt install bash git coreutils findutils grep gawk sed jq shellcheck bats shfmt python3-venv python3-pip
+sudo apt install bash git coreutils findutils grep gawk sed jq shellcheck bats shfmt python3-venv python3-pip tzdata procps
 bash --version
 ```
 
 설치는 관리자 권한이 필요하지만 교재 실습은 일반 사용자로 진행합니다. 배포판 버전에 따라 패키지 제공 여부가 다를 수 있습니다. 설치 실패 시 해당 패키지와 배포판 버전을 먼저 확인합니다.
+
+01장의 자기 환경 관찰에는 `procps`의 ps와 `tzdata`의 Asia/Seoul 데이터가 필요합니다. `TZ=Asia/Seoul date '+%z'`가 `+0900`인지 확인합니다. 최소 컨테이너에서 시간대 데이터가 빠지면 잘못된 오프셋이 나올 수 있으며, 관찰 도구는 이 경우 성공 보고서를 만들지 않습니다. 이 설정은 명령의 표시 시간대를 지정하며 시스템 시계를 바꾸지 않습니다.
 
 ### macOS: 실행 파일 구분
 

@@ -2,7 +2,11 @@
 
 * [표지](README.md)
 * [학습 안내와 실습 연결표](course-guide.md)
-* [01. Bash와 Shell Programming 소개](01-bash-intro.md)
+* [01. Linux 보안 조사와 Shell 실행 모델](01-bash-intro.md)
+  * [01-1. 첫 조사에서 확인할 정보](01-bash-intro/01-1-first-observation.md)
+  * [01-2. 명령이 실행되는 과정](01-bash-intro/01-2-shell-execution.md)
+  * [01-3. 행위·흔적·판단의 구분](01-bash-intro/01-3-artifacts-and-reasoning.md)
+  * [01-4. 첫 조사 기록 실습](01-bash-intro/01-4-observation-lab.md)
 * [02. 개발 및 실습 환경](02-bash-setup.md)
 * [03. Bash 기초 문법](03-bash-basics.md)
   * [03-1. 명령 실행과 종료 상태](03-bash-basics/03-1-execution-model.md)

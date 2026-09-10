@@ -88,4 +88,6 @@ if find "$work" -name '.log-report.*' | grep -q .; then
     fail 'temporary report leaked'
 fi
 pass 'temporary report cleanup'
+bash "$root/tests/test-first-observation.sh" || fail 'first observation checks'
+pass 'first observation companion'
 printf 'All %s behavior checks passed.\n' "$passed"

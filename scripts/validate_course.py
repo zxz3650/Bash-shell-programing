@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import argparse
+import ast
+import json
 import re
 import subprocess
 from pathlib import Path
@@ -44,14 +46,22 @@ def validate_documents() -> None:
 def validate_notebooks(execute: bool) -> None:
     import nbformat
     from nbclient import NotebookClient
+    from build_jupyter_book import NOTEBOOKS
 
     paths = sorted((ROOT / "jupyter-book/labs").glob("*.ipynb"))
     for path in paths:
+        assert json.loads(path.read_text(encoding="utf-8")) == NOTEBOOKS[path.name], f"regenerate notebook: {path.name}"
         notebook = nbformat.read(path, as_version=4)
         nbformat.validate(notebook)
         for cell in notebook.cells:
             if cell.cell_type == "code":
                 assert cell.execution_count is None and not cell.outputs, f"committed output: {path.name}"
+                if cell.source.startswith("%%bash\n"):
+                    checked = subprocess.run(["bash", "-n"], input=cell.source.split("\n", 1)[1],
+                                             text=True, capture_output=True)
+                    assert checked.returncode == 0, f"notebook Bash syntax: {path.name}\n{checked.stderr}"
+                else:
+                    ast.parse(cell.source, filename=f"{path.name}:{cell.id}")
         if execute:
             # Execute an in-memory copy; do not store host names or local paths in Git.
             NotebookClient(notebook, timeout=120, kernel_name="python3",

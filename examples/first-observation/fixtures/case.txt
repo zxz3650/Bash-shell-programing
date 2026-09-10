@@ -1,0 +1,13 @@
+case_id=LAB-001
+source_type=synthetic
+observed_at=2026-09-10T09:00:00+09:00
+host=lab-ubuntu
+os=Linux
+kernel=6.8.0-lab
+uid=1000
+gid=1000
+group=sudo
+configured_login_shell=/bin/zsh
+observed_shell=bash
+approved_activity=inventory review
+audit_coverage=unknown
