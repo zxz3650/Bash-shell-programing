@@ -1,8 +1,8 @@
-# 07. 계정·권한 점검과 안전한 스크립트
+# 07. 안전한 Shell Script
 
-## 보안 질문에서 시작하기
+## 기본 학습과 보안 실습 연결
 
-“누가 무엇을 통제할 수 있는가?” [계정·권한 위험 검토](07-secure-scripting/07-3-account-permission-review.md)에서 특수 비트·sudo·capability·변경 권한을 비교합니다. 아래 안전 설계 절을 적용해 점검 스크립트 자체가 입력이나 원본을 잘못 처리하지 않도록 합니다.
+07-1·07-2의 입력 검증·데이터 경계·dry-run·원본 보존을 학습합니다. 이어서 [07-3. 계정·권한 위험 검토](07-secure-scripting/07-3-account-permission-review.md)에서 특수 비트·sudo·capability·변경 권한을 비교합니다. 점검 스크립트에도 배운 안전 설계를 적용합니다.
 
 이어서 [07-4. GTFOBins와 권한 경계 검토](07-secure-scripting/07-4-gtfobins-review.md)에서 정상 도구의 기능·권한 문맥·업무 범위를 비교합니다. Red Team의 위험 질문과 Blue Team의 실행 근거를 연결하고, 네 개의 합성 검토 카드로 등재·설정·행위 판정이 다른 이유를 연습합니다.
 

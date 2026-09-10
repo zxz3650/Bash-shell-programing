@@ -15,19 +15,6 @@ project:
   github: zxz3650/Bash-shell-programing
   toc:
     - file: index.md
-    - title: 장별 보안 분석 실습
-      children:
-        - file: labs/security-02-evidence.ipynb
-        - file: labs/security-03-ioc.ipynb
-        - file: labs/security-04-files.ipynb
-        - file: labs/security-05-auth.ipynb
-        - file: labs/security-06-process-network.ipynb
-        - file: labs/security-07-permissions.ipynb
-        - file: labs/security-08-persistence.ipynb
-        - file: labs/security-09-login.ipynb
-        - file: labs/security-10-journal-audit.ipynb
-        - file: labs/security-11-web.ipynb
-        - file: labs/security-12-triage.ipynb
     - title: 기초와 판단
       children:
         - file: labs/00-orientation-and-safety.ipynb
@@ -48,6 +35,20 @@ project:
         - file: labs/09-error-contracts.ipynb
         - file: labs/10-modules-contracts.ipynb
         - file: labs/11-bounded-parallel.ipynb
+
+    - title: 보안 적용 실습
+      children:
+        - file: labs/security-02-evidence.ipynb
+        - file: labs/security-03-ioc.ipynb
+        - file: labs/security-04-files.ipynb
+        - file: labs/security-05-auth.ipynb
+        - file: labs/security-06-process-network.ipynb
+        - file: labs/security-07-permissions.ipynb
+        - file: labs/security-08-persistence.ipynb
+        - file: labs/security-09-login.ipynb
+        - file: labs/security-10-journal-audit.ipynb
+        - file: labs/security-11-web.ipynb
+        - file: labs/security-12-triage.ipynb
 
 site:
   template: book-theme

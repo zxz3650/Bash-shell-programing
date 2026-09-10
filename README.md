@@ -15,22 +15,22 @@ Linux 시스템을 조사하고 로그를 분석하며 반복 점검을 자동�
 
 ## 학습 순서
 
-[학습 안내와 실습 연결표](course-guide.md)에서 교안·노트북·프로젝트의 연결을 확인합니다. 12개 장과 49개 상세 절 중 각 장의 보안 실습을 먼저 진행하고 필요한 문법 참고 절을 찾아봅니다. 실습은 예상 출력·해석·실패 사례·분석 질문·완료 기준으로 이어집니다.
+[Bash 문법 찾아보기](bash-syntax-index.md)에서 변수·인용·배열·조건문·반복문·함수의 상세 교안으로 바로 이동할 수 있습니다. [학습 안내와 실습 연결표](course-guide.md)에 따라 12개 장·49개 상세 절의 기본 설명과 문법 실습을 학습한 뒤 같은 장의 보안 적용 실습으로 연결합니다. 기본 문법 교안과 기존 프로젝트는 독립적인 학습 경로로 계속 제공합니다.
 
 Red Team의 목적·권한 경계를 Blue Team의 아티팩트·로그·탐지·완화와 같은 사례에서 비교합니다. [GTFOBins 해설](07-secure-scripting/07-4-gtfobins-review.md)은 정상 도구의 기능과 실제 설정을 구분하는 법을 다룹니다.
 
-1. [01. Linux 보안 조사와 Shell 실행 모델](01-bash-intro.md)
-2. [02. 분석 환경과 증거 취급](02-bash-setup.md)
-3. [03. IOC 검색과 Bash 기본기](03-bash-basics.md)
-4. [04. 파일시스템 조사와 안전한 입출력](04-file-io.md)
-5. [05. SSH 로그 분석과 파이프라인](05-text-processing.md)
-6. [06. 호스트·프로세스·네트워크 조사](06-system-inspection.md)
-7. [07. 계정·권한 점검과 안전한 스크립트](07-secure-scripting.md)
-8. [08. 자동 시작·지속성 흔적 점검](08-system-automation.md)
-9. [09. 로그인 아티팩트와 분석 검증](09-testing-debugging.md)
-10. [10. Journal·Audit 분석과 함수 구조화](10-program-architecture.md)
-11. [11. 웹 로그 분석과 제한된 배치 처리](11-parallel-jobs.md)
-12. [12. DFIR Triage와 보안 자동화 종합 실습](12-capstone.md)
+1. [01. Bash와 Shell Programming 소개](01-bash-intro.md)
+2. [02. 개발 및 실습 환경](02-bash-setup.md)
+3. [03. Bash 기초 문법](03-bash-basics.md)
+4. [04. 파일 입출력과 권한](04-file-io.md)
+5. [05. 파이프라인과 텍스트 처리](05-text-processing.md)
+6. [06. 프로세스와 시스템 조사](06-system-inspection.md)
+7. [07. 안전한 Shell Script](07-secure-scripting.md)
+8. [08. 시스템 자동화](08-system-automation.md)
+9. [09. 테스트와 디버깅](09-testing-debugging.md)
+10. [10. 프로그램 구조화](10-program-architecture.md)
+11. [11. 병렬 작업과 대량 처리](11-parallel-jobs.md)
+12. [12. Bash 활용 종합 프로젝트](12-capstone.md)
 
 ## 실습용 Jupyter Book
 
@@ -43,7 +43,7 @@ Red Team의 목적·권한 경계를 Blue Team의 아티팩트·로그·탐지·
 
 ## 학습 산출물
 
-완성 예제는 [로그 보고서 프로젝트](examples/log-report/README.md), 프로젝트 요구사항과 평가 기준은 [12장](12-capstone.md)에 있습니다. 저장소 루트에서 `bash tests/test-course.sh`를 실행하면 정상 입력과 잘못된 입력을 처리하는 동작을 확인할 수 있습니다.
+완성 예제는 [로그 보고서 프로젝트](examples/log-report/README.md), 프로젝트 요구사항과 평가 기준은 [12. Bash 활용 종합 프로젝트](12-capstone.md)에 있습니다. 저장소 루트에서 `bash tests/test-course.sh`를 실행하면 정상 입력과 잘못된 입력을 처리하는 동작을 확인할 수 있습니다.
 
 - 실행 가능한 Bash 프로그램과 명령줄 인터페이스
 - 로그·파일·프로세스·네트워크 상태 수집 기능

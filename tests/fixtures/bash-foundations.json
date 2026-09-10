@@ -1,0 +1,15 @@
+{
+  "reference_commit": "93d4ddc",
+  "purpose": "Preserve the nine original Bash syntax lessons. Update only after an explicitly reviewed content revision.",
+  "sha256": {
+    "03-bash-basics/03-1-execution-model.md": "4b64874677efa8f417e40ade01e445835278cef7c0ce09a68db3612de5517b36",
+    "03-bash-basics/03-2-variables-environment.md": "b0e416cf36f67ed708de0f62f6b0add16781d02c561f885bcf5a1eab5ba9723c",
+    "03-bash-basics/03-3-quoting-expansion.md": "b37db0e959dcaae962e8baaecc42c4c36da09a873d0d6c698f4b4609915814e9",
+    "03-bash-basics/03-4-arguments-arrays.md": "a34c4b3f0e18312e15e77ba13b5d1c706245fa6c55b00205fc230a0f84d25883",
+    "03-bash-basics/03-5-strings-arithmetic.md": "2aa11998a696ce0c4965fa5a3c63543b359f401990bdf621822bb020bf50e2b1",
+    "03-bash-basics/03-6-conditions.md": "c0a02430e825ddca47cdc218c8b05c6722f34b8a4816b49ef2ffc233729c5544",
+    "03-bash-basics/03-7-loops.md": "3bb1aa7a04ed0d1b4164620b8fd6b37639a0b473ddc24434fca1453e363ca6f0",
+    "03-bash-basics/03-8-functions.md": "b341c5d29e2264bb6e3c2832d6de5a101a3530db41bf272eff11df50bd647359",
+    "03-bash-basics/03-9-syntax-project.md": "8fdfdc74260e183d4104cb807258e3de9ea975a6a4f4e311a1fba631e27101bd"
+  }
+}

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import ast
+import hashlib
 import json
 import re
 import subprocess
@@ -41,6 +42,24 @@ def validate_documents() -> None:
     for script in list((ROOT / "examples").rglob("*.sh")) + list((ROOT / "tests").glob("*.sh")):
         subprocess.run(["bash", "-n", str(script)], check=True)
     print(f"Documents: {len(pages)} SUMMARY pages, {blocks} Bash blocks, local links and executable syntax OK")
+
+
+def validate_foundation_preservation() -> None:
+    baseline = json.loads((ROOT / 'tests/fixtures/bash-foundations.json').read_text(encoding='utf-8'))
+    summary = (ROOT / 'SUMMARY.md').read_text(encoding='utf-8')
+    index = (ROOT / 'bash-syntax-index.md').read_text(encoding='utf-8')
+    assert '* [03. Bash 기초 문법](03-bash-basics.md)' in summary
+    assert 'Bash 문법 찾아보기' in summary
+    positions = []
+    for name, expected in baseline['sha256'].items():
+        assert hashlib.sha256((ROOT / name).read_bytes()).hexdigest() == expected, f'original syntax lesson changed: {name}'
+        assert name in index, f'syntax index missing: {name}'
+        positions.append(summary.index('](' + name + ')'))
+    assert len(positions) == 9 and positions == sorted(positions), 'syntax lesson sequence changed'
+    assert max(positions) < summary.index('](03-bash-basics/03-10-ioc-search.md)'), 'IOC precedes foundational lessons'
+    toc = (ROOT / 'jupyter-book/myst.yml').read_text(encoding='utf-8')
+    assert toc.index('file: labs/03-conditions-loops-functions.ipynb') < toc.index('file: labs/security-03-ioc.ipynb')
+    print('Foundations: nine original lessons byte-identical; syntax index and foundation-first navigation OK')
 
 
 def validate_security_coverage() -> None:
@@ -105,6 +124,7 @@ def main() -> None:
     parser.add_argument("--execute-notebooks", action="store_true")
     args = parser.parse_args()
     validate_documents()
+    validate_foundation_preservation()
     validate_security_coverage()
     validate_notebooks(args.execute_notebooks)
 
