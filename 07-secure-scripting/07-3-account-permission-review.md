@@ -70,6 +70,26 @@ ch07.sh는 실제 계정·파일 권한을 바꾸지 않고 합성 목록을 읽
 
 legacy-admin의 승인을 어디서 확인할까? collector 그룹 쓰기가 어떤 업무상 필요일 수 있을까? 실행 사용자와 변경 권한을 모르는데 권한 상승 가능성을 확정할 수 있을까? 정상 예외·부족한 자료·완화 방안을 제출합니다. 실제 권한 변경이나 공격 성공 재현은 완료 조건이 아닙니다.
 
+## Red Team ↔ Blue Team 사례 분석
+
+### 사례: UID 0 계정과 쓰기 가능한 업무 파일
+
+**Red Team 질문:** 식별된 계정·권한 예외가 업무 범위를 넘어서는 통제 가능성을 만드는가? UID 0 계정 둘과 그룹 쓰기 가능 파일 하나는 서로 다른 관찰입니다. 두 사실을 연결하는 실행·접근 조건 없이 하나의 권한 상승 경로로 단정하지 않습니다.
+
+| 연결 단계 | 분석 내용 |
+|---|---|
+| Goal / Boundary | 계정·위임·파일 변경 경계의 과도한 권한 검토 |
+| Command / Observation | awk로 UID 0과 권한 요약 읽기, 승인 VM에서는 범위를 정한 find/getcap 조회 |
+| System Change / Artifact | 계정·그룹·비트·ACL·Capability·정책의 변경 가능 흔적. 현재 값은 변경 주체를 직접 보여주지 않음 |
+| Log prerequisite | 계정 관리·Audit·정책 변경·패키지/배포 기록. sudo 로그는 모든 SUID 실행 기록이 아님 |
+| Blue Team Investigation | legacy-admin의 생성·승인·사용 이력, collector 파일의 실행 주체와 수정 권한 비교 |
+| Detection | 정상 기준선 밖의 권한 변경과 실제 사용을 별도 경보·조사 상태로 관리 |
+| Mitigation | 예외 권한 재검토·업무와 배포 권한 분리·정책 변경 승인. 원본 보존 후 승인 절차로 수정 |
+
+**반례와 해설:** passwd의 SUID는 정상 배포 기준선일 수 있습니다. nologin 설정은 특정 셸 로그인 경로를 제한하지만 UID 0 권한을 없애는 것이 아닙니다. 자동 보고서는 `review`를 `exploited`로 바꾸지 않습니다.
+
+**제출 과제:** 계정 예외와 파일 예외를 별도 항목으로 작성하고, 각각 성립 조건·부족한 자료·정상 반례·완화를 적습니다. 다음 절의 [GTFOBins 검토](07-4-gtfobins-review.md)에서 정상 도구의 기능과 실행 권한 문맥을 비교합니다.
+
 ## 참고 자료
 
 - [passwd 형식](https://man7.org/linux/man-pages/man5/passwd.5.html)

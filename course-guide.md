@@ -44,6 +44,28 @@ security-02부터 security-12까지는 장별 보안 실습이다. 기존 00부�
 
 각 장의 기대값·질문·완료 기준으로 평가한다. 코드만 성공하고 근거·반례·누락을 설명하지 못하면 분석 과제는 완료한 것이 아니다.
 
+## Red Team·Blue Team 학습 연결과 평가
+
+Red Team은 허가된 진단에서 공격자의 목표·필요 조건·보안 경계를 검토하는 역할, Blue Team은 같은 관찰의 흔적·정상 반례·탐지·완화를 검토하는 역할로 학습한다. [01-3의 공통 제출 양식](01-bash-intro/01-3-artifacts-and-reasoning.md)을 사용한다. 02장은 양쪽 역할이 공통으로 지켜야 할 범위·증거·시간대의 기초다.
+
+| 교안 | Red Team 질문 | Blue Team / DFIR 연결 | 평가할 산출물 |
+|---|---|---|---|
+| [03 IOC](03-bash-basics/03-10-ioc-search.md) | 정보 공개 범위가 적절한가? | 문자열·필드·실제 사용 흔적 구분 | 일치 원문·필드·오탐 |
+| [04 파일](04-file-io/04-4-filesystem-investigation.md) | 변경 주체와 실행 주체의 경계는? | 메타데이터·해시·배포·실행 비교 | 파일 식별·정상 배포 반례 |
+| [05 인증](05-text-processing/05-4-auth-pipeline.md) | 인증·접근 보호가 적절한가? | 실패·공개키 성공·세션 교차 | KST 시점·인증 방식·누락 |
+| [06 프로세스](06-system-inspection/06-3-host-process-investigation.md) | 실행 환경·권한은 무엇인가? | PID·시작·경로·서비스 | 네 필드와 승인 자료 요청 |
+| [06 네트워크](06-system-inspection/06-4-network-investigation.md) | 로컬 정보가 보여주는 접근 경계는? | 소켓·프로세스·승인 목적지 | 정상 통신 반례·필드 한계 |
+| [07 권한](07-secure-scripting/07-3-account-permission-review.md) | 과도한 위임·변경 권한이 있는가? | 계정·정책·실제 실행·승인 | 계정/파일 예외 별도 검토 |
+| [07 GTFOBins](07-secure-scripting/07-4-gtfobins-review.md) | 도구 기능과 권한 문맥의 차이는? | 등재·설정·행위 판정 분리 | 가상 카드 4개·상태별 집계 |
+| [08 지속성](08-system-automation/08-3-persistence-review.md) | 자동 실행 구성의 변경 통제는? | 설정·활성화·실행·승인 | 위치별 자료·미수집 표기 |
+| [09 로그인](09-testing-debugging/09-3-login-artifacts.md) | 유효 계정 접근 범위는? | 인증·세션·최근 로그인 구분 | 중복 집계 방지·실제 주체 한계 |
+| [10 Journal](10-program-architecture/10-3-journal-analysis.md) | 서비스 실행·변경 권한의 차이는? | 동일 부팅·unit·변경 자료 | 부팅 문맥·미확인 변경 주체 |
+| [10 Audit](10-program-architecture/10-4-audit-analysis.md) | 관찰 권한과 위임이 일치하는가? | auid/euid·명령·sudo·승인 | 이벤트 단위·실행/승인 분리 |
+| [11 웹](11-parallel-jobs/11-3-web-log-analysis.md) | 인증·파일 처리 경계는? | 요청·응답·앱·호스트 영향 | 정상 요청 반례·추가 근거 |
+| [12 종합](12-capstone/12-3-dfir-capstone.md) | 세 경계의 위험 전제는? | 사실·반례·누락·탐지·완화 | 사건 카드 3개·역할 교대 |
+
+security-03부터 security-12까지의 노트북에는 연결된 교안 사례와 역할별 분석 기록이 포함된다. 07장 네 카드는 별도 가상 훈련이며 12장 사건의 실제 설정 자료가 아니다. 자동 테스트는 입력 형식·계산·원본 보존을 검사하고, 근거에 맞는 위험 설명과 탐지 설계는 강사/동료가 평가한다. 실제 공격 실행을 자동 채점에 포함하지 않는다.
+
 ## 수업 비중 예시
 
 100시간 편성 예시이며 실행 시간을 측정한 값이 아니다. 공격 관점은 목적·전제·권한 경계를 해석하는 시간으로 공격 실행 실습을 뜻하지 않는다.

@@ -11,7 +11,7 @@
 | 04 | 파일 조사 | [보기](security-04-files.ipynb) | [Colab](https://colab.research.google.com/github/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/security-04-files.ipynb) |
 | 05 | SSH 로그 | [보기](security-05-auth.ipynb) | [Colab](https://colab.research.google.com/github/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/security-05-auth.ipynb) |
 | 06 | 프로세스·네트워크 | [보기](security-06-process-network.ipynb) | [Colab](https://colab.research.google.com/github/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/security-06-process-network.ipynb) |
-| 07 | 계정·권한 | [보기](security-07-permissions.ipynb) | [Colab](https://colab.research.google.com/github/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/security-07-permissions.ipynb) |
+| 07 | 계정·권한·GTFOBins 검토 | [보기](security-07-permissions.ipynb) | [Colab](https://colab.research.google.com/github/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/security-07-permissions.ipynb) |
 | 08 | 지속성 흔적 | [보기](security-08-persistence.ipynb) | [Colab](https://colab.research.google.com/github/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/security-08-persistence.ipynb) |
 | 09 | 로그인 아티팩트 | [보기](security-09-login.ipynb) | [Colab](https://colab.research.google.com/github/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/security-09-login.ipynb) |
 | 10 | Journal·Audit | [보기](security-10-journal-audit.ipynb) | [Colab](https://colab.research.google.com/github/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/security-10-journal-audit.ipynb) |
@@ -19,6 +19,8 @@
 | 12 | DFIR Capstone | [보기](security-12-triage.ipynb) | [Colab](https://colab.research.google.com/github/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/security-12-triage.ipynb) |
 
 ## 기초·심화 참고 노트북
+
+위 security-03부터 security-12까지는 계산 뒤 Red Team ↔ Blue Team 사례와 분석 기록을 작성합니다. 07장의 GTFOBins 검토 카드는 실제 시스템 점검 결과가 아닌 별도 합성 훈련입니다. 12장에서는 인증·권한·지속성 사건 카드 세 개로 역할을 교대하고 근거·정상 반례·탐지·완화를 평가합니다.
 
 | 순서 | 주제 | GitHub | 바로 실행 |
 |---:|---|---|---|

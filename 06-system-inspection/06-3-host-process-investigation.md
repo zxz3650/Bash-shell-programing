@@ -82,6 +82,26 @@ ch06.sh에서 프로세스 4행과 소켓 3행을 읽고 PID 520을 collector/re
 
 다음은 [네트워크 상태 해석](06-4-network-investigation.md)입니다.
 
+## Red Team ↔ Blue Team 사례 분석
+
+### 사례: 익숙한 서비스 이름이 신뢰의 근거인가
+
+**Red Team 질문:** 프로세스·서비스 정보에서 권한 경계나 운영상의 노출을 이해할 수 있는가? 실행 이름이 아니라 사용자·실행 파일·설정 출처가 중요하며, 버전 정보만으로 취약점 악용 가능성을 확정하지 않습니다.
+
+| 연결 단계 | 분석 내용 |
+|---|---|
+| Goal / Boundary | 환경과 실행 권한을 이해하려는 목적. 관찰 범위·네임스페이스·읽기 권한이 전제 |
+| Command / Observation | ps·pgrep·/proc·systemctl 정보를 비교. 합성 PID 520은 collector로 09:05 시작 |
+| System Change / Artifact | 프로세스 생성·부모 관계·실행 파일·FD. 종료된 프로세스는 현재 /proc에 없을 수 있음 |
+| Log prerequisite | 사전 exec 감사/EDR와 서비스 Journal. 프로세스 스냅샷은 과거 실행 전부가 아님 |
+| Blue Team Investigation | report-helper.service의 unit·drop-in·실행 경로·배포 이력을 PID와 비교 |
+| Detection | 예상 사용자·실행 경로·부모·시간대에서 벗어난 조합을 검토. 이름만 차단하지 않음 |
+| Mitigation | 서비스별 최소 권한·신뢰된 배포 경로·필요한 실행 기록. 중지 전 휘발성 근거와 영향 검토 |
+
+**반례와 해설:** PPID 1은 정상 서비스에도 나타납니다. PID 520이라는 숫자는 다음 부팅에서 다른 프로세스가 재사용할 수 있습니다. 지금 실행 중인 파일의 해시와 과거 사건 시점 파일의 해시를 같은 사실로 취급하지 않습니다.
+
+**제출 과제:** PID 520에 대해 사용자·시작 시각·실행 경로·서비스 네 필드를 제시합니다. Red Team은 추가 확인할 경계 하나, Blue Team은 필요한 자료 두 개를 적습니다. 프로세스 명령행 전체를 공개 보고서에 복사하기 전에 민감정보 검토 필요성도 설명합니다.
+
 ## 참고 자료
 
 - [Linux /proc](https://www.kernel.org/doc/html/latest/filesystems/proc.html)

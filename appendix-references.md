@@ -15,6 +15,9 @@
 | subshell | 부모와 분리된 셸 실행 환경 |
 | idempotency | 같은 요청을 반복해도 추가 효과가 달라지지 않는 성질 |
 | atomic publication | 다른 프로그램이 작성 중인 파일을 읽지 않도록, 완성된 결과만 최종 경로에서 읽을 수 있게 하는 방식 |
+| Red Team 관점 | 허가된 평가에서 공격자 목적·필요 조건·보안 경계의 위험을 검토하는 관점 |
+| Blue Team / DFIR 관점 | 같은 행위의 흔적·정상 반례·수집 한계·탐지·완화를 조사하는 관점 |
+| GTFOBins | 정상 Unix 계열 도구의 기능과 실행 권한 문맥을 검토하는 공개 레퍼런스. 등재 자체가 취약점 판정은 아님 |
 
 ## 플랫폼 표
 
@@ -44,6 +47,8 @@ macOS의 /bin/sh가 Bash 확장을 일부 허용하더라도 POSIX sh 스크립�
 - [shfmt](https://github.com/mvdan/sh): 셸 코드 서식
 - [Bats documentation](https://bats-core.readthedocs.io/en/stable/): 동작 테스트
 - [Microsoft WSL 설치](https://learn.microsoft.com/en-us/windows/wsl/install): Windows 실습 환경
+- [GTFOBins](https://gtfobins.org/): 정상 도구 기능·권한 문맥. [07-4 해설과 실습](07-secure-scripting/07-4-gtfobins-review.md)에서 설정·실행·판정을 구분
+- [MITRE ATT&CK](https://attack.mitre.org/): 관찰 맥락에 맞는 행위 분류. 기법 ID 자체는 침해의 증거가 아님
 
 ## 도구 확인 명령
 

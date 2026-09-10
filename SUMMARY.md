@@ -39,6 +39,7 @@
   * [06-2. 작업·시그널·정리](06-system-inspection/06-2-jobs-signals.md)
 * [07. 계정·권한 점검과 안전한 스크립트](07-secure-scripting.md)
   * [07-3. 계정·권한 위험 검토](07-secure-scripting/07-3-account-permission-review.md)
+  * [07-4. GTFOBins와 권한 경계 검토](07-secure-scripting/07-4-gtfobins-review.md)
   * [07-1. 입력 검증과 데이터 경계](07-secure-scripting/07-1-input-boundaries.md)
   * [07-2. dry-run·멱등성·보존](07-secure-scripting/07-2-dry-run-idempotency.md)
 * [08. 자동 시작·지속성 흔적 점검](08-system-automation.md)

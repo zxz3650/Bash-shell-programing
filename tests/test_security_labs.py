@@ -36,6 +36,42 @@ for script in scripts:
 print(f"All {len(scripts)} security lab workflows passed.")
 
 TOOLS = ROOT / 'examples/security-labs'
+
+# Exercise malformed review summaries, not active permissions or system policy.
+with tempfile.TemporaryDirectory(prefix='course-review-check-') as temporary:
+    work = Path(temporary)
+    original = (DATA / 'tool-review.psv').read_text()
+    malformed_cards = {
+        'bad-header': original.replace('case_id|', 'id|', 1),
+        'invalid-state': original.replace('|unknown|not_collected', '|safe|not_collected', 1),
+        'duplicate-id': original.replace('R02|', 'R01|', 1),
+        'bad-field-count': original.replace('R02|report-helper|', 'R02|', 1),
+        'header-only': original.splitlines()[0] + '\n',
+        'empty': '',
+    }
+    for name, content in malformed_cards.items():
+        source = work / name
+        shutil.copytree(DATA, source)
+        (source / 'tool-review.psv').write_text(content)
+        output = work / (name + '-out')
+        output.mkdir()
+        env = dict(os.environ, COURSE_DATA=str(source), COURSE_OUT=str(output))
+        result = subprocess.run(['bash', str(TOOLS / 'ch07.sh')], env=env,
+                                text=True, capture_output=True, timeout=30)
+        assert result.returncode == 2, (name, result)
+        assert not (output / 'tool-review-results.psv').exists(), name
+    source = work / 'membership-change'
+    shutil.copytree(DATA, source)
+    (source / 'tool-review.psv').write_text(original.replace('R01|text-filter|yes|', 'R01|text-filter|no|'))
+    output = work / 'membership-out'
+    output.mkdir()
+    env = dict(os.environ, COURSE_DATA=str(source), COURSE_OUT=str(output))
+    result = subprocess.run(['bash', str(TOOLS / 'ch07.sh')], env=env,
+                            text=True, capture_output=True, timeout=30)
+    assert result.returncode == 0, result
+    assert 'R01|no|aligned|present' in (output / 'tool-review-results.psv').read_text()
+    print('PASS: review schema, six malformed inputs, membership does not change supplied assessment')
+
 def run(tool, args):
     return subprocess.run(['bash', str(TOOLS / tool), *map(str, args)],
                           text=True, capture_output=True, timeout=30)

@@ -1,5 +1,30 @@
 """Build security companions from reviewed shell steps and synthetic fixtures."""
 import re
+from pathlib import Path
+import os
+from urllib.parse import urlsplit
+
+
+def perspective_section(root, page):
+    """Reuse the reviewed lesson narrative so book and notebook cannot drift."""
+    document = (root / page).read_text(encoding="utf-8")
+    heading = "## Red Team ↔ Blue Team 사례 분석"
+    assert document.count(heading) == 1, f"missing/duplicate perspective section: {page}"
+    section = document.split(heading, 1)[1].split("\n## ", 1)[0]
+
+    def rebase(match):
+        target = match.group(1)
+        link = urlsplit(target)
+        if link.scheme or not link.path or link.path.startswith('/'):
+            return match.group(0)
+        resolved = root / Path(page).parent / link.path
+        target = Path(os.path.relpath(resolved, root / 'jupyter-book/labs')).as_posix()
+        if link.fragment:
+            target += '#' + link.fragment
+        return '](' + target + ')'
+
+    section = re.sub(r'\]\(([^)]+)\)', rebase, section)
+    return heading + section
 
 CHAPTERS = {
     "11": ("web", "웹 로그와 제한된 배치", "11-parallel-jobs/11-3-web-log-analysis.md", "요청·상태를 분리하고 두 로컬 작업을 검증합니다.", "HTTP401=3, 200=2, 404=1; auth5행/access6행"),
@@ -8,7 +33,7 @@ CHAPTERS = {
     "09": ("login", "로그인 아티팩트 교차 검증", "09-testing-debugging/09-3-login-artifacts.md", "합성 로그인 요약을 교차 확인하고 잘못된 입력을 검출합니다.", "아티팩트 4행, 성공 1행, malformed 행 검출"),
     "10": ("journal-audit", "Journal·Audit 이벤트 연결", "10-program-architecture/10-4-audit-analysis.md", "서비스의 부팅 문맥과 Audit 레코드·이벤트 단위를 구분합니다.", "서비스 2행, Audit 6레코드/1이벤트, auid1000/euid0은 승인 여부와 별개"),
     "06": ("process-network", "프로세스·소켓 문맥 연결", "06-system-inspection/06-3-host-process-investigation.md", "합성 스냅샷을 연결하고 PID·시각·서비스 문맥의 한계를 설명합니다.", "프로세스 4행, PID 520의 서비스·목적지 연결, 판정은 추가 검토"),
-    "07": ("permissions", "계정·권한 기준선 검토", "07-secure-scripting/07-3-account-permission-review.md", "UID 0·특수 비트·쓰기 권한을 정상 기준선과 비교합니다.", "UID 0 계정 2개, 기준선 SUID 1개, 검토 항목 1개, 악용 입증 아님"),
+    "07": ("permissions", "계정·권한·GTFOBins 검토", "07-secure-scripting/07-3-account-permission-review.md", "UID 0·특수 비트·쓰기 권한을 정상 기준선과 비교하고 GTFOBins 관련성·설정·실행 근거를 분리합니다.", "UID 0 계정 2개, 기준선 SUID 1개, 검토 항목 1개; 별도 카드 aligned=2/review=1/unknown=1, 악용 입증 아님"),
     "03": ("ioc", "IOC 검색과 입력 경계", "03-bash-basics/03-10-ioc-search.md", "문자열·정규식·필드 비교와 검색 실패를 구분합니다.", "literal=1 regex=2; substring=2 exact_field=1; no_match_status=1"),
     "04": ("files", "파일 조사와 경계 보존", "04-file-io/04-4-filesystem-investigation.md", "공백·개행 파일명을 보존하고 사본의 변경을 확인합니다.", "파일 4개, 줄 수 5, 원본 평문 보존"),
     "05": ("auth", "SSH 로그 파이프라인", "05-text-processing/05-4-auth-pipeline.md", "원문→실패 행→주소→빈도를 단계별로 확인합니다.", "실패 3건, 주소별 2/1건, 공개키 성공 1건, sudo 기록 1건"),
@@ -26,10 +51,12 @@ def build_security_notebooks(md, code, notebook, root):
     selected_inputs = {
         '02': ['provenance.txt'], '03': ['ioc.log'], '04': ['provenance.txt'],
         '05': ['auth.log'], '06': ['processes.psv', 'sockets.psv'],
-        '07': ['passwd.sample', 'permissions.psv'],
+        '07': ['passwd.sample', 'permissions.psv', 'tool-review.psv'],
         '08': ['persistence.psv', 'service-review.txt'],
         '09': ['login-review.psv', 'auth.log'], '10': ['journal-review.psv', 'audit.log'],
-        '11': ['access.log', 'auth.log'], '12': list(all_fixtures),
+        '11': ['access.log', 'auth.log'],
+        # Standalone review cards are not evidence from the Capstone incident.
+        '12': [name for name in all_fixtures if name != 'tool-review.psv'],
     }
     tools = {name: (root / 'examples/security-labs' / name).read_text(encoding='utf-8')
              for name in ('ioc-search.sh', 'triage-offline.sh')}
@@ -61,6 +88,27 @@ def build_security_notebooks(md, code, notebook, root):
             cells += [md(f"### {(i + 1) // 2}. {chunks[i]}"),
                       code("%%bash\nset -euo pipefail\n"
                            ': "${COURSE_DATA:?}" "${COURSE_OUT:?}"\n' + chunks[i + 1])]
+        if number >= '03':
+            pages = [page]
+            if number == '06':
+                pages.append('06-system-inspection/06-4-network-investigation.md')
+            if number == '07':
+                pages.append('07-secure-scripting/07-4-gtfobins-review.md')
+                cells.append(md('## GTFOBins 연결\n\n[07-4 전체 해설](../../07-secure-scripting/07-4-gtfobins-review.md)을 읽습니다. '
+                                'tool-review.psv는 가상 검토 카드이며 실제 목록·sudo 정책·사건 증거가 아닙니다. '
+                                '설정 상태 aligned=2/review=1/unknown=1과 실행 자료 present=2/not_collected=2는 별도 축입니다. '
+                                'R01의 등재만으로 취약, R03의 미등재만으로 안전이라고 결론 내리지 않습니다.'))
+            if number == '10':
+                pages.append('10-program-architecture/10-3-journal-analysis.md')
+            cells.extend(md(perspective_section(root, selected)) for selected in pages)
+            cells.append(md('## 역할별 분석 기록\n\n같은 실행 결과로 아래 항목을 작성하고 상대 관점에서 검토합니다. '
+                            '자동 테스트는 계산과 원본 보존만 확인하며 이 서술 과제는 강사 또는 동료 검토 대상입니다.\n\n'
+                            '| 항목 | 학생 작성 |\n|---|---|\n'
+                            '| Red Team 목적·필요 조건 | 관찰에서 도출한 질문과 전제 |\n'
+                            '| 실제 관찰 | 파일·행·이벤트 ID와 출력 |\n'
+                            '| Artifact·로깅 전제 | 확보한 자료와 필요한 기록 기능 |\n'
+                            '| Blue Team 조사 | 정상 반례·추가 근거·수집 한계 |\n'
+                            '| 탐지·완화 | 필요한 필드·오탐 사례·확인된 원인에 맞는 조치 |'))
         cells += [md("## Checks\n\n각 STEP의 test는 고정 자료의 계산 결과를 검사합니다. 아래는 원본 내용 보존을 확인합니다. 실행 성공과 침해 판정은 다릅니다. 어떤 결과가 사실이고 어떤 결론이 가설인지 교안 질문에 답합니다."),
                   code("after = {name: hashlib.sha256((data / name).read_bytes()).hexdigest() for name in fixtures}\n"
                        "assert before == after\nprint('원본 내용 보존: PASS')\n"

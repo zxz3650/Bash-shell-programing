@@ -1,0 +1,5 @@
+case_id|tool_role|reference_listed|context|business_need|approval|scope_fit|telemetry
+R01|text-filter|yes|unprivileged|documented|approved|aligned|present
+R02|report-helper|yes|sudo|unknown|unknown|unknown|not_collected
+R03|custom-helper|no|service|documented|unknown|review|not_collected
+R04|network-helper|yes|capabilities|documented|approved|aligned|present

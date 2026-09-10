@@ -43,6 +43,27 @@ def validate_documents() -> None:
     print(f"Documents: {len(pages)} SUMMARY pages, {blocks} Bash blocks, local links and executable syntax OK")
 
 
+def validate_security_coverage() -> None:
+    # Structural regression guard, not a substitute for educational review.
+    from security_notebooks import CHAPTERS, perspective_section
+    required = {details[2] for number, details in CHAPTERS.items() if number >= '03'}
+    required.update({
+        '06-system-inspection/06-4-network-investigation.md',
+        '07-secure-scripting/07-4-gtfobins-review.md',
+        '10-program-architecture/10-3-journal-analysis.md',
+    })
+    summary = (ROOT / 'SUMMARY.md').read_text(encoding='utf-8')
+    for page in required:
+        assert page in summary, f'perspective page not published: {page}'
+        section = perspective_section(ROOT, page)
+        for term in ('Red Team', 'Blue Team', 'Artifact', 'Detection', 'Mitigation'):
+            assert term in section, f'missing {term}: {page}'
+    gtfo = (ROOT / '07-secure-scripting/07-4-gtfobins-review.md').read_text(encoding='utf-8')
+    for term in ('https://gtfobins.org/', 'Sudo', 'SUID', 'Capabilities', 'R01', 'R02', 'R03', 'R04'):
+        assert term in gtfo, f'missing GTFOBins learning anchor: {term}'
+    print(f'Security coverage: {len(required)} linked perspective sections and GTFOBins learning anchors OK')
+
+
 def validate_notebooks(execute: bool) -> None:
     import nbformat
     from nbclient import NotebookClient
@@ -84,6 +105,7 @@ def main() -> None:
     parser.add_argument("--execute-notebooks", action="store_true")
     args = parser.parse_args()
     validate_documents()
+    validate_security_coverage()
     validate_notebooks(args.execute_notebooks)
 
 
