@@ -90,4 +90,6 @@ fi
 pass 'temporary report cleanup'
 bash "$root/tests/test-first-observation.sh" || fail 'first observation checks'
 pass 'first observation companion'
+bash "$root/tests/test-security-labs.sh" || fail 'security lab workflows'
+pass 'security lab companions and CLI checks'
 printf 'All %s behavior checks passed.\n' "$passed"

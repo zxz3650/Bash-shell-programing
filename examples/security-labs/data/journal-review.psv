@@ -1,0 +1,5 @@
+time_kst|boot_id|unit|pid|message
+2026-09-10T08:00:00+09:00|BOOT-A|init.scope|1|System boot
+2026-09-10T09:02:00+09:00|BOOT-A|ssh.service|104|Accepted publickey for analyst
+2026-09-10T09:05:00+09:00|BOOT-A|report-helper.service|1|Started report helper
+2026-09-10T09:06:00+09:00|BOOT-A|report-helper.service|520|Report completed

@@ -1,0 +1,7 @@
+# Synthetic review excerpt only. Not an installable unit file.
+unit=report-helper.service
+User=collector
+ExecStart=/opt/collector/bin/report
+FragmentPath=/etc/systemd/system/report-helper.service
+DropInPaths=not_collected
+change_ticket=unknown

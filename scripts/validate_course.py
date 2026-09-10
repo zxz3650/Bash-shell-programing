@@ -49,11 +49,20 @@ def validate_notebooks(execute: bool) -> None:
     from build_jupyter_book import NOTEBOOKS
 
     paths = sorted((ROOT / "jupyter-book/labs").glob("*.ipynb"))
+    toc = (ROOT / 'jupyter-book/myst.yml').read_text(encoding='utf-8')
+    toc_paths = re.findall(r'file:\s+(\S+\.ipynb)', toc)
+    assert len(toc_paths) == len(set(toc_paths)), 'duplicate notebook TOC entry'
+    assert {str(p.relative_to(ROOT / 'jupyter-book')) for p in paths} == set(toc_paths), 'notebook TOC mismatch'
     for path in paths:
         assert json.loads(path.read_text(encoding="utf-8")) == NOTEBOOKS[path.name], f"regenerate notebook: {path.name}"
         notebook = nbformat.read(path, as_version=4)
         nbformat.validate(notebook)
         for cell in notebook.cells:
+            if cell.cell_type == 'markdown':
+                for target in re.findall(r'\]\(([^)]+)\)', cell.source):
+                    link = urlsplit(target)
+                    if not link.scheme and link.path and not link.path.startswith('/'):
+                        assert (path.parent / unquote(link.path)).resolve().exists(), f'notebook link: {path.name} -> {target}'
             if cell.cell_type == "code":
                 assert cell.execution_count is None and not cell.outputs, f"committed output: {path.name}"
                 if cell.source.startswith("%%bash\n"):

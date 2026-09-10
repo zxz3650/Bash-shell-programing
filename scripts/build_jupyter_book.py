@@ -8,6 +8,7 @@ import hashlib
 from pathlib import Path
 
 from chapter01_notebook import build_chapter01
+from security_notebooks import build_security_notebooks
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -42,7 +43,7 @@ import tempfile
 
 lab_dir = Path(tempfile.mkdtemp(prefix="bash-book-{slug}-"))
 os.environ["BASH_LAB_DIR"] = str(lab_dir)
-print(f"격리된 실습 디렉터리: {{lab_dir}}")'''
+print(f"새 임시 실습 디렉터리: {{lab_dir}}")'''
     )
 
 
@@ -84,7 +85,7 @@ NOTEBOOKS: dict[str, dict] = {
 - Shell Programming, 셸 명령 언어와 Bash 인터프리터의 관계를 설명한다.
 - `sh`와 Bash 전용 스크립트의 차이를 실행으로 확인한다.
 - 현재 셸과 Bash 버전을 확인한다.
-- 실습 파일을 격리된 임시 디렉터리에서만 만든다.
+- 실습 파일은 새 임시 디렉터리에서만 만든다. 이 폴더는 OS 샌드박스가 아니다.
 - 명령의 출력과 종료 상태를 함께 관찰한다."""
             ),
             md(
@@ -397,7 +398,7 @@ set -euo pipefail
 report="$BASH_LAB_DIR/system-snapshot.txt"
 {
   printf '== timestamp ==\\n'
-  date -u '+%Y-%m-%dT%H:%M:%SZ'
+  TZ=Asia/Seoul date '+%Y-%m-%dT%H:%M:%S%z'
   printf '\\n== kernel ==\\n'
   uname -a
   printf '\\n== filesystem ==\\n'
@@ -556,7 +557,7 @@ mkdir -p -- "$output"
 log="$output/collection.log"
 report="$output/system-report.txt"
 
-log_message() { printf '%s %s\\n' "$(date -u '+%Y-%m-%dT%H:%M:%SZ')" "$*" | tee -a "$log"; }
+log_message() { printf '%s %s\\n' "$(TZ=Asia/Seoul date '+%Y-%m-%dT%H:%M:%S%z')" "$*" | tee -a "$log"; }
 
 log_message 'collection started'
 {
@@ -738,6 +739,9 @@ printf 'failure propagated; partial report not emitted\\n' '''),
         ],
     ),
 })
+
+
+NOTEBOOKS.update(build_security_notebooks(md, code, notebook, ROOT))
 
 
 def main() -> None:

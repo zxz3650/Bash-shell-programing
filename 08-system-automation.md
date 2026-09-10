@@ -1,4 +1,8 @@
-# 08. 시스템 자동화
+# 08. 자동 시작·지속성 흔적 점검
+
+## 보안 질문에서 시작하기
+
+“예약·부팅·로그인 시 동작이 승인됐는가?” [지속성 위치 검토](08-system-automation/08-3-persistence-review.md)를 진행합니다. 아래 CLI·예약 실행의 기본기는 정상 운영 자동화와 설정의 실행 조건을 이해하는 참고 자료입니다. 보안 실습에서는 실제 지속성을 설치하지 않습니다.
 
 ## 개요
 
@@ -58,7 +62,7 @@ readonly config_file="$script_dir/config.env"
 log() {
     local level=$1
     shift
-printf '%s\t%s\t%s\n' "$(date -u '+%Y-%m-%dT%H:%M:%SZ')" "$level" "$*" >&2
+printf '%s\t%s\t%s\n' "$(TZ=Asia/Seoul date '+%Y-%m-%dT%H:%M:%S%z')" "$level" "$*" >&2
 }
 ```
 

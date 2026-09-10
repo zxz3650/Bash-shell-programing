@@ -1,8 +1,16 @@
-# 02. 개발 및 실습 환경
+# 02. 분석 환경과 증거 취급
 
 ## 개요
 
-Windows WSL 2 또는 Linux에 Bash 실습 환경을 구성하고 명령 탐색, shebang, 종료 상태와 도움말 사용법을 익힙니다.
+Linux 보안 조사 환경을 준비하고 원본과 결과를 분리하여 재현 가능한 실습을 시작합니다. 설치뿐 아니라 관찰 범위와 증거 취급 조건도 확인합니다.
+
+## 보안 실습 순서
+
+1. [02-1. 조사 환경과 실습 범위 정하기](02-bash-setup/02-1-lab-boundaries.md)
+2. [02-2. 원본·해시·시간대를 보존하는 분석 준비](02-bash-setup/02-2-evidence-time.md)
+3. [02-3. Jupyter에서 재현 가능한 조사 실습하기](02-bash-setup/02-3-notebook-workflow.md)
+
+아래 설치·명령 탐색 안내는 필요한 환경을 준비할 때 참고합니다.
 
 ## 학습 전 확인
 
@@ -12,8 +20,8 @@ Windows WSL 2 또는 Linux에 Bash 실습 환경을 구성하고 명령 탐색, 
 
 | 환경 | 준비 | 이 교안에서의 범위 |
 |---|---|---|
-| Windows | WSL2 Ubuntu 설치 | Linux 명령까지 전체 실습 |
-| Linux | Bash·GNU 도구 확인 | 전체 실습 |
+| Windows | WSL2 Ubuntu 설치 | Bash·파일 분석, 서비스는 지원 여부 확인 |
+| Linux | 별도 Ubuntu VM·GNU 도구 | 기준 환경, 로그·권한별 준비 필요 |
 | macOS | 기본 Bash 또는 별도 Bash | 공통 문법·프로젝트, Linux 전용 제외 |
 | Colab | 노트북 링크 열기 | 셀 실행, 영구 예약 작업 제외 |
 
@@ -37,6 +45,8 @@ bash --version
 ```
 
 설치는 관리자 권한이 필요하지만 교재 실습은 일반 사용자로 진행합니다. 배포판 버전에 따라 패키지 제공 여부가 다를 수 있습니다. 설치 실패 시 해당 패키지와 배포판 버전을 먼저 확인합니다.
+
+선택 Linux 조회에 필요한 패키지는 iproute2(ip·ss), lsof, file, binutils(strings), libcap2-bin(getcap), auditd(ausearch·aureport), systemd(journalctl)입니다. 실습 VM의 구성과 패키지 제공 여부를 먼저 확인합니다. 특히 auditd 설치는 서비스 상태에 영향을 줄 수 있으므로 운영 증거 시스템에서 설치하지 않습니다. 필수 오프라인 노트북에는 이런 서비스 설정이 필요하지 않습니다.
 
 01장의 자기 환경 관찰에는 `procps`의 ps와 `tzdata`의 Asia/Seoul 데이터가 필요합니다. `TZ=Asia/Seoul date '+%z'`가 `+0900`인지 확인합니다. 최소 컨테이너에서 시간대 데이터가 빠지면 잘못된 오프셋이 나올 수 있으며, 관찰 도구는 이 경우 성공 보고서를 만들지 않습니다. 이 설정은 명령의 표시 시간대를 지정하며 시스템 시계를 바꾸지 않습니다.
 
@@ -128,7 +138,7 @@ command -v jq
 
 printf 'user=%s\n' "$(id -un)"
 printf 'host=%s\n' "$(hostname)"
-printf 'time=%s\n' "$(date -u '+%Y-%m-%dT%H:%M:%SZ')"
+printf 'time=%s\n' "$(TZ=Asia/Seoul date '+%Y-%m-%dT%H:%M:%S%z')"
 ```
 
 위 내용을 실습 폴더의 `system_info.sh`로 저장한 뒤 그 폴더에서 실행합니다.
@@ -141,7 +151,7 @@ chmod u+x system_info.sh
 echo "$?"
 ```
 
-사용자·호스트·UTC 시각 세 행과 마지막 상태 0을 확인합니다. 값은 환경마다 달라집니다. bash로 파일을 읽어 실행할 때와 실행 권한을 주어 직접 실행할 때를 구분합니다.
+사용자·호스트·KST 시각 세 행과 마지막 상태 0을 확인합니다. 값은 환경마다 달라집니다. bash로 파일을 읽어 실행할 때와 실행 권한을 주어 직접 실행할 때를 구분합니다.
 
 ## 첫 실행 오류 해결
 

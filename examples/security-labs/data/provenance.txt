@@ -1,0 +1,10 @@
+case_id=COURSE-IR-002
+source_type=synthetic
+source_host=lab-web-01
+source_timezone=Asia/Seoul
+window_start=2026-09-10T09:00:00+09:00
+window_end=2026-09-10T10:00:00+09:00
+collector=course-author
+collection_scope=selected teaching records only
+audit_coverage=partial
+authorization=offline classroom analysis

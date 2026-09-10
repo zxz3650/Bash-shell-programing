@@ -1,6 +1,24 @@
 # 실습 목록과 운영 방법
 
-## 노트북 목록
+## 장별 보안 실습
+
+다음 노트북은 해당 교안 장과 함께 실행합니다. 합성 자료가 포함되어 별도 다운로드가 필요하지 않습니다. 실제 wtmp·Journal 바이너리 검증과 라이브 시스템 조사는 교안에 표시된 별도 Ubuntu VM 선택 실습입니다.
+
+| 장 | 주제 | 노트북 | 바로 실행 |
+|---|---|---|---|
+| 02 | 환경·증거·KST | [보기](security-02-evidence.ipynb) | [Colab](https://colab.research.google.com/github/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/security-02-evidence.ipynb) |
+| 03 | IOC·입력 경계 | [보기](security-03-ioc.ipynb) | [Colab](https://colab.research.google.com/github/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/security-03-ioc.ipynb) |
+| 04 | 파일 조사 | [보기](security-04-files.ipynb) | [Colab](https://colab.research.google.com/github/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/security-04-files.ipynb) |
+| 05 | SSH 로그 | [보기](security-05-auth.ipynb) | [Colab](https://colab.research.google.com/github/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/security-05-auth.ipynb) |
+| 06 | 프로세스·네트워크 | [보기](security-06-process-network.ipynb) | [Colab](https://colab.research.google.com/github/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/security-06-process-network.ipynb) |
+| 07 | 계정·권한 | [보기](security-07-permissions.ipynb) | [Colab](https://colab.research.google.com/github/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/security-07-permissions.ipynb) |
+| 08 | 지속성 흔적 | [보기](security-08-persistence.ipynb) | [Colab](https://colab.research.google.com/github/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/security-08-persistence.ipynb) |
+| 09 | 로그인 아티팩트 | [보기](security-09-login.ipynb) | [Colab](https://colab.research.google.com/github/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/security-09-login.ipynb) |
+| 10 | Journal·Audit | [보기](security-10-journal-audit.ipynb) | [Colab](https://colab.research.google.com/github/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/security-10-journal-audit.ipynb) |
+| 11 | 웹 로그·배치 | [보기](security-11-web.ipynb) | [Colab](https://colab.research.google.com/github/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/security-11-web.ipynb) |
+| 12 | DFIR Capstone | [보기](security-12-triage.ipynb) | [Colab](https://colab.research.google.com/github/zxz3650/Bash-shell-programing/blob/master/jupyter-book/labs/security-12-triage.ipynb) |
+
+## 기초·심화 참고 노트북
 
 | 순서 | 주제 | GitHub | 바로 실행 |
 |---:|---|---|---|

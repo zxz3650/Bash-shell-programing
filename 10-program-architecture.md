@@ -1,4 +1,8 @@
-# 10. 프로그램 구조화
+# 10. Journal·Audit 분석과 함수 구조화
+
+## 보안 질문에서 시작하기
+
+[Journal의 시간·부팅·서비스](10-program-architecture/10-3-journal-analysis.md)와 [Audit 이벤트](10-program-architecture/10-4-audit-analysis.md)를 연결합니다. 아래 모듈·함수 설명을 이용해 수집·파싱·검증·판단의 역할을 나눕니다. 복잡한 형식은 Bash 문자열 처리만으로 해결하려 하지 않습니다.
 
 ## 개요
 

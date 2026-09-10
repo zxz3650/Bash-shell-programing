@@ -1,0 +1,5 @@
+2026-09-10T09:01:00+09:00 lab-web-01 sshd[101]: Failed password for invalid user guest from 192.0.2.10 port 50100 ssh2
+2026-09-10T09:01:10+09:00 lab-web-01 sshd[102]: Failed password for analyst from 192.0.2.10 port 50101 ssh2
+2026-09-10T09:01:20+09:00 lab-web-01 sshd[103]: Failed password for analyst from 198.51.100.8 port 50102 ssh2
+2026-09-10T09:02:00+09:00 lab-web-01 sshd[104]: Accepted publickey for analyst from 192.0.2.10 port 50103 ssh2
+2026-09-10T09:03:00+09:00 lab-web-01 sudo: analyst : TTY=pts/0 ; PWD=/home/analyst ; USER=root ; COMMAND=/usr/bin/id

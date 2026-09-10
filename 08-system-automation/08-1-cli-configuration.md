@@ -60,12 +60,12 @@ getopts는 긴 옵션을 직접 지원하지 않는다. --output 같은 인터�
 log() {
     local level=$1
     shift
-    printf '%s\t%s\t%s\n' "$(date -u '+%Y-%m-%dT%H:%M:%SZ')" "$level" "$*" >&2
+    printf '%s\t%s\t%s\n' "$(TZ=Asia/Seoul date '+%Y-%m-%dT%H:%M:%S%z')" "$level" "$*" >&2
 }
 log INFO 'validation completed'
 ```
 
-stdout에는 다른 프로그램에 전달할 결과 데이터만 출력한다. 시각은 UTC임을 명시하고, 로그 메시지의 탭·개행을 허용할지 정한다. 구조화 로그가 복잡해지면 jq나 Python으로 JSON을 생성한다.
+stdout에는 다른 프로그램에 전달할 결과 데이터만 출력한다. 시각은 KST(+0900)로 표시하고 원본 시각과 구분한다. 로그 메시지의 탭·개행을 허용할지 정한다. 구조화 로그가 복잡해지면 jq나 Python으로 JSON을 생성한다.
 
 ## 🧪 직접 해보기
 

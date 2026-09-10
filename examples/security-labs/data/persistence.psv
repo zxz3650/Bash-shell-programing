@@ -1,0 +1,5 @@
+mechanism|path|owner|approval|observed_kst
+systemd|/etc/systemd/system/report-helper.service|root|unknown|2026-09-10T09:05:00+09:00
+cron|/etc/cron.d/backup|root|CHG-100|2026-09-09T18:00:00+09:00
+shell-startup|/home/analyst/.bashrc|analyst|baseline|2026-09-01T10:00:00+09:00
+ssh-key|/home/analyst/.ssh/authorized_keys|analyst|KEY-200|2026-09-01T10:00:00+09:00

@@ -1,0 +1,5 @@
+artifact|user|source|time_kst|meaning
+btmp-summary|analyst|192.0.2.10|2026-09-10T09:01:10+09:00|failed
+wtmp-summary|analyst|192.0.2.10|2026-09-10T09:02:00+09:00|session-start
+lastlog-summary|analyst|192.0.2.10|2026-09-10T09:02:00+09:00|latest-login
+utmp-summary|analyst|192.0.2.10|2026-09-10T09:10:00+09:00|present-at-collection

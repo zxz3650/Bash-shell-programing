@@ -1,0 +1,4 @@
+root:x:0:0:root:/root:/bin/bash
+analyst:x:1000:1000:Analyst:/home/analyst:/bin/bash
+collector:x:995:995:Collector:/var/lib/collector:/usr/sbin/nologin
+legacy-admin:x:0:0:Legacy:/var/lib/legacy:/usr/sbin/nologin

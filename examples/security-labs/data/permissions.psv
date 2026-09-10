@@ -1,0 +1,4 @@
+path|owner|group|mode|purpose|approval
+/usr/bin/passwd|root|root|4755|password-management|baseline
+/opt/collector/bin/report|root|collector|0775|service-executable|review
+/var/tmp/course-cache|root|root|1777|shared-temp|baseline

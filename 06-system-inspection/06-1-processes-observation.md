@@ -26,7 +26,7 @@ uname -s
 출력 숫자는 환경마다 다르다. PID와 PPID가 ps의 필드와 어떻게 연결되는지 확인한다. PID는 재사용될 수 있으므로 장시간 수집 결과는 시각과 함께 기록한다.
 
 ```bash
-date -u '+%Y-%m-%dT%H:%M:%SZ'
+TZ=Asia/Seoul date '+%Y-%m-%dT%H:%M:%S%z'
 ps -eo pid,ppid,user,comm | sed -n '1,16p'
 ```
 
