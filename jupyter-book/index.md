@@ -15,7 +15,26 @@ security-03부터 security-12까지는 교안의 Red Team ↔ Blue Team 사례�
 - 시스템 상태를 읽기 전용으로 조사하고 결과를 재현 가능하게 저장한다.
 - 실패를 빠르게 감지하고 테스트 가능한 자동화 스크립트를 작성한다.
 
-## 시작하기
+## 실습 자료 다운로드 — 학생용
+
+**[장별 학습용 노트북 ZIP 받기](../downloads/README.md)** · [전체 노트북 23개 받기](https://github.com/zxz3650/Bash-shell-programing/raw/refs/heads/master/downloads/all-labs.zip)
+
+Git 설치 없이 ZIP을 받아 시작할 수 있습니다. 압축을 푼 폴더의 `START-HERE.md`에서 노트북 실행 순서를 확인합니다. [실습 자료 받기와 시작하기](../PRACTICE.md)에 설치부터 첫 셀 실행, 개인 풀이 보관까지 안내되어 있습니다.
+
+ZIP 안의 `requirements.txt`가 있는 폴더에서 실행합니다.
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+jupyter lab
+```
+
+JupyterLab의 `notebooks/`에서 `.ipynb`를 열고 **Python 3** 커널로 실행합니다. 다운로드 ZIP은 노트북 실습용이며 완성된 HTML Jupyter Book이 아닙니다.
+
+## 전체 저장소로 시작하기 — 강사·프로젝트 학습용
+
+터미널 프로젝트 소스와 교안까지 함께 필요한 경우 다음 방법을 사용합니다. 학생용 ZIP의 폴더 구조와 다르므로 위 실행 명령과 구분합니다.
 
 ```bash
 git clone https://github.com/zxz3650/Bash-shell-programing.git
@@ -42,9 +61,9 @@ jupyter book start jupyter-book
 4. 오류가 발생하면 출력과 종료 상태 `$?`를 함께 기록합니다.
 5. 보안 관련 명령은 본인 소유 시스템이나 명시적으로 허가된 실습 환경에서만 사용합니다.
 
-## 보안 실습과 참고 실습
+## 기본 학습에서 보안 실습으로
 
-[장별 보안 실습 목록](labs/README.md)의 security-02~12를 해당 교안과 함께 진행합니다. 합성 자료만 사용하는 필수 실습과 Linux 전용 도구를 사용하는 선택 VM 조사는 구분합니다. 아래 기존 실습은 필요한 기본기를 보충할 때 사용합니다.
+아래 기본·심화 노트북에서 Bash 문법을 먼저 학습하고, [장별 실습 목록](labs/README.md)의 security-02~12로 적용합니다. 합성 자료만 사용하는 필수 실습과 Linux 전용 도구를 사용하는 선택 VM 조사는 구분합니다. [다운로드 연결표](../downloads/README.md)에서 각 장의 기본 노트북과 보안 노트북을 함께 받을 수 있습니다.
 
 | 순서 | 실습 | 결과물 |
 |---:|---|---|

@@ -1,5 +1,9 @@
 # 11. 병렬 작업과 대량 처리
 
+**[11장 학습용 노트북 ZIP 받기](https://github.com/zxz3650/Bash-shell-programing/raw/refs/heads/master/downloads/chapter-11.zip)** · [처음 실행하는 방법](PRACTICE.md) · [포함 노트북과 자료 버전](downloads/README.md)
+
+압축을 푼 뒤 `START-HERE.md`의 순서대로 기본 실습부터 실행하고 보안 적용 실습으로 이어갑니다.
+
 ## 기본 학습과 보안 실습 연결
 
 11-1·11-2에서 작업 수 제한·wait·결과 순서·직렬/병렬 비교를 학습합니다. 이어서 [11-3. 웹 로그 실습](11-parallel-jobs/11-3-web-log-analysis.md)에서 두 로컬 파일의 처리와 분석에 적용합니다. 명령을 빠르게 실행하는 것보다 자료 형식·실패·결과 순서를 검증하는 것이 우선입니다.

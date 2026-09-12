@@ -1,5 +1,9 @@
 # 10. 프로그램 구조화
 
+**[10장 학습용 노트북 ZIP 받기](https://github.com/zxz3650/Bash-shell-programing/raw/refs/heads/master/downloads/chapter-10.zip)** · [처음 실행하는 방법](PRACTICE.md) · [포함 노트북과 자료 버전](downloads/README.md)
+
+압축을 푼 뒤 `START-HERE.md`의 순서대로 기본 실습부터 실행하고 보안 적용 실습으로 이어갑니다.
+
 ## 기본 학습과 보안 실습 연결
 
 10-1·10-2에서 모듈·함수·Bash와 Python의 역할 분담을 학습한 뒤 [10-3. Journal 분석](10-program-architecture/10-3-journal-analysis.md)과 [10-4. Audit 이벤트](10-program-architecture/10-4-audit-analysis.md)에 적용합니다. 수집·파싱·검증·판단을 나누고 복잡한 형식에 맞는 도구를 선택합니다.

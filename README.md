@@ -4,6 +4,14 @@ Linux 시스템을 조사하고 로그를 분석하며 반복 점검을 자동�
 
 보안 질문에서 출발해 필요한 명령과 Bash 문법을 익힙니다. 출력의 의미와 한계를 확인하고 원본을 보존하며 근거 있는 조사 기록을 만듭니다.
 
+## 실습 자료를 받고 시작하세요
+
+**교안을 읽으며 직접 실행해 보세요.** 수강할 장의 학습용 Jupyter 노트북 ZIP을 내려받고, 압축을 푼 뒤 `START-HERE.md`의 순서대로 진행합니다. Git이나 GitHub 계정 없이 받을 수 있습니다.
+
+**[장별 실습 자료 다운로드](downloads/README.md)** · [전체 노트북 23개 ZIP 받기](https://github.com/zxz3650/Bash-shell-programing/raw/refs/heads/master/downloads/all-labs.zip) · [처음 실행하는 방법](PRACTICE.md)
+
+Ubuntu 환경에서 JupyterLab을 시작하고 Python 3 커널로 `.ipynb`를 엽니다. 기본 Bash 문법 실습부터 학습한 뒤 같은 장의 보안 적용 실습으로 연결합니다. 예제 코드와 합성 입력 자료는 노트북 안에 포함되어 있습니다.
+
 ## 이 교재에서 배우는 내용
 
 - 셸 실행 모델과 Linux 명령 사용법을 먼저 학습합니다.

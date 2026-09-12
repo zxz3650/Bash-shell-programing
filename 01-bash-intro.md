@@ -1,5 +1,9 @@
 # 01. Bash와 Shell Programming 소개
 
+**[01장 학습용 노트북 ZIP 받기](https://github.com/zxz3650/Bash-shell-programing/raw/refs/heads/master/downloads/chapter-01.zip)** · [처음 실행하는 방법](PRACTICE.md) · [포함 노트북과 자료 버전](downloads/README.md)
+
+압축을 푼 뒤 `START-HERE.md`의 순서대로 기본 실습부터 실행하고 보안 적용 실습으로 이어갑니다.
+
 ## 개요
 
 터미널에서 매번 입력하던 명령을 파일에 저장하고, 조건문과 반복문을 더하면 같은 작업을 자동으로 수행할 수 있습니다. 이를 **Shell Programming(셸 프로그래밍)**이라고 합니다. 이 교재에서는 명령과 스크립트를 해석하고 실행하는 셸로 **Bash**를 사용합니다.

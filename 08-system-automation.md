@@ -1,5 +1,9 @@
 # 08. 시스템 자동화
 
+**[08장 학습용 노트북 ZIP 받기](https://github.com/zxz3650/Bash-shell-programing/raw/refs/heads/master/downloads/chapter-08.zip)** · [처음 실행하는 방법](PRACTICE.md) · [포함 노트북과 자료 버전](downloads/README.md)
+
+압축을 푼 뒤 `START-HERE.md`의 순서대로 기본 실습부터 실행하고 보안 적용 실습으로 이어갑니다.
+
 ## 기본 학습과 보안 실습 연결
 
 08-1·08-2에서 CLI·설정·로그·예약 실행·잠금을 학습한 뒤 [08-3. 지속성 위치 검토](08-system-automation/08-3-persistence-review.md)에 연결합니다. 정상 자동화가 작동하는 조건을 이해한 상태에서 승인·변경·실행 흔적을 비교합니다. 보안 적용 실습에서는 지속성을 설치하지 않습니다.

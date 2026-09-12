@@ -1,5 +1,9 @@
 # 12. Bash 활용 종합 프로젝트
 
+**[12장 학습용 노트북 ZIP 받기](https://github.com/zxz3650/Bash-shell-programing/raw/refs/heads/master/downloads/chapter-12.zip)** · [처음 실행하는 방법](PRACTICE.md) · [포함 노트북과 자료 버전](downloads/README.md)
+
+압축을 푼 뒤 `START-HERE.md`의 순서대로 기본 실습부터 실행하고 보안 적용 실습으로 이어갑니다.
+
 ## 기본 프로젝트와 보안 종합 실습 연결
 
 12-1 로그 보고서와 12-2 로컬 스냅샷 프로젝트에서 문법·안전 설계·테스트를 통합합니다. 이어서 [12-3. Linux DFIR Capstone](12-capstone/12-3-dfir-capstone.md)에서 장별 보안 자료를 연결하고, 기능별 오프라인 수집 함수·manifest·해시·KST·부분 실패·사실/가설 보고서를 제출합니다. 기본 프로젝트와 보안 종합 실습의 요구사항을 각각 확인합니다.

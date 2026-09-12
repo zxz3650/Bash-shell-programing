@@ -1,5 +1,9 @@
 # 04. 파일 입출력과 권한
 
+**[04장 학습용 노트북 ZIP 받기](https://github.com/zxz3650/Bash-shell-programing/raw/refs/heads/master/downloads/chapter-04.zip)** · [처음 실행하는 방법](PRACTICE.md) · [포함 노트북과 자료 버전](downloads/README.md)
+
+압축을 푼 뒤 `START-HERE.md`의 순서대로 기본 실습부터 실행하고 보안 적용 실습으로 이어갑니다.
+
 ## 기본 학습과 보안 실습 연결
 
 04-1부터 04-3까지 경로·권한·파일명·스트림·저장을 학습한 뒤 [04-4. 파일시스템 조사 실습](04-file-io/04-4-filesystem-investigation.md)에서 find·stat·해시와 NUL 구분을 적용합니다. 기본 예제와 조사 실습을 같은 입력 경계·원본 보존 원칙으로 연결합니다.

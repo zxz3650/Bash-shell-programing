@@ -1,5 +1,9 @@
 # 06. 프로세스와 시스템 조사
 
+**[06장 학습용 노트북 ZIP 받기](https://github.com/zxz3650/Bash-shell-programing/raw/refs/heads/master/downloads/chapter-06.zip)** · [처음 실행하는 방법](PRACTICE.md) · [포함 노트북과 자료 버전](downloads/README.md)
+
+압축을 푼 뒤 `START-HERE.md`의 순서대로 기본 실습부터 실행하고 보안 적용 실습으로 이어갑니다.
+
 ## 기본 학습과 보안 실습 연결
 
 06-1·06-2에서 프로세스·작업·시그널·정리를 학습한 뒤 [06-3. 호스트·프로세스·서비스](06-system-inspection/06-3-host-process-investigation.md)와 [06-4. 네트워크 상태](06-system-inspection/06-4-network-investigation.md)를 연결합니다. 적용 실습은 합성 스냅샷이며 라이브 조회는 승인된 자기 환경에서만 수행합니다. 조회하지 않은 범위도 기록합니다.

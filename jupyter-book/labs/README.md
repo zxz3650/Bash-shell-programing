@@ -1,5 +1,9 @@
 # 실습 목록과 운영 방법
 
+**[장별 노트북 ZIP 다운로드](../../downloads/README.md)** · [전체 23개 ZIP 받기](https://github.com/zxz3650/Bash-shell-programing/raw/refs/heads/master/downloads/all-labs.zip) · [설치·첫 실행 안내](../../PRACTICE.md)
+
+처음 시작할 때는 ZIP을 받고 압축을 푼 뒤 `START-HERE.md`를 읽습니다. 아래 GitHub 링크는 내용 미리보기, Colab 링크는 설치 없이 실행하는 대안입니다.
+
 처음 배우는 학생은 아래 기본 노트북을 순서대로 실행합니다. [Bash 문법 찾아보기](../../bash-syntax-index.md)에서 각 문법의 상세 설명을 읽고, 익힌 내용을 뒤의 보안 적용 노트북으로 연결합니다. 노트북 번호와 교안 장 번호는 항상 같지 않습니다.
 
 ## 기본·심화 학습 노트북

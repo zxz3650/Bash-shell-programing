@@ -1,5 +1,9 @@
 # 02. 개발 및 실습 환경
 
+**[02장 학습용 노트북 ZIP 받기](https://github.com/zxz3650/Bash-shell-programing/raw/refs/heads/master/downloads/chapter-02.zip)** · [처음 실행하는 방법](PRACTICE.md) · [포함 노트북과 자료 버전](downloads/README.md)
+
+압축을 푼 뒤 `START-HERE.md`의 순서대로 기본 실습부터 실행하고 보안 적용 실습으로 이어갑니다.
+
 ## 개요
 
 Windows WSL 2 또는 Linux에 Bash 실습 환경을 구성하고 명령 탐색, shebang, 종료 상태와 도움말 사용법을 익힙니다. 기본 환경과 첫 스크립트 실행을 확인한 뒤 원본·결과 분리와 증거 취급 실습으로 연결합니다.

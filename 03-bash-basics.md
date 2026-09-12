@@ -1,5 +1,9 @@
 # 03. Bash 기초 문법
 
+**[03장 학습용 노트북 ZIP 받기](https://github.com/zxz3650/Bash-shell-programing/raw/refs/heads/master/downloads/chapter-03.zip)** · [처음 실행하는 방법](PRACTICE.md) · [포함 노트북과 자료 버전](downloads/README.md)
+
+압축을 푼 뒤 `START-HERE.md`의 순서대로 기본 실습부터 실행하고 보안 적용 실습으로 이어갑니다.
+
 ## 기본 학습과 보안 실습 연결
 
 처음 배우는 학생은 01·02장을 마친 뒤 아래 03-1부터 03-9까지의 기본 문법을 순서대로 학습합니다. 변수·인용·인수·조건·반복·함수를 직접 실행한 다음 [03-10. IOC 검색 실습](03-bash-basics/03-10-ioc-search.md)에 적용합니다. 문법을 이미 아는 학생은 적용 실습의 질문부터 시작해 필요한 절을 복습할 수 있습니다. [Bash 문법 찾아보기](bash-syntax-index.md)에서도 각 상세 절로 바로 이동할 수 있습니다.

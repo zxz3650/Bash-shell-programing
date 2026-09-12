@@ -1,6 +1,8 @@
 # 목차
 
 * [표지](README.md)
+* [학습용 Jupyter 노트북 다운로드](downloads/README.md)
+* [실습 자료 받기와 시작하기](PRACTICE.md)
 * [학습 안내와 실습 연결표](course-guide.md)
 * [Bash 문법 찾아보기](bash-syntax-index.md)
 * [01. Bash와 Shell Programming 소개](01-bash-intro.md)

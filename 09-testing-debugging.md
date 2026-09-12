@@ -1,5 +1,9 @@
 # 09. 테스트와 디버깅
 
+**[09장 학습용 노트북 ZIP 받기](https://github.com/zxz3650/Bash-shell-programing/raw/refs/heads/master/downloads/chapter-09.zip)** · [처음 실행하는 방법](PRACTICE.md) · [포함 노트북과 자료 버전](downloads/README.md)
+
+압축을 푼 뒤 `START-HERE.md`의 순서대로 기본 실습부터 실행하고 보안 적용 실습으로 이어갑니다.
+
 ## 기본 학습과 보안 실습 연결
 
 09-1·09-2에서 오류 전파·ShellCheck·동작 테스트를 학습한 뒤 [09-3. 로그인 아티팩트 실습](09-testing-debugging/09-3-login-artifacts.md)의 계산과 형식을 검증합니다. 실행 코드뿐 아니라 분석 전제에도 반례를 준비합니다.

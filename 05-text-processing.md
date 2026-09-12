@@ -1,5 +1,9 @@
 # 05. 파이프라인과 텍스트 처리
 
+**[05장 학습용 노트북 ZIP 받기](https://github.com/zxz3650/Bash-shell-programing/raw/refs/heads/master/downloads/chapter-05.zip)** · [처음 실행하는 방법](PRACTICE.md) · [포함 노트북과 자료 버전](downloads/README.md)
+
+압축을 푼 뒤 `START-HERE.md`의 순서대로 기본 실습부터 실행하고 보안 적용 실습으로 이어갑니다.
+
 ## 기본 학습과 보안 실습 연결
 
 05-1부터 05-3까지 파이프라인·텍스트 도구·입력 형식을 학습한 뒤 [05-4. SSH 인증 로그 실습](05-text-processing/05-4-auth-pipeline.md)에 적용합니다. 원문→행 선택→주소→빈도의 각 단계가 배운 명령과 종료 상태에 어떻게 대응하는지 확인합니다.

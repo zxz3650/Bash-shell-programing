@@ -1,5 +1,9 @@
 # 07. 안전한 Shell Script
 
+**[07장 학습용 노트북 ZIP 받기](https://github.com/zxz3650/Bash-shell-programing/raw/refs/heads/master/downloads/chapter-07.zip)** · [처음 실행하는 방법](PRACTICE.md) · [포함 노트북과 자료 버전](downloads/README.md)
+
+압축을 푼 뒤 `START-HERE.md`의 순서대로 기본 실습부터 실행하고 보안 적용 실습으로 이어갑니다.
+
 ## 기본 학습과 보안 실습 연결
 
 07-1·07-2의 입력 검증·데이터 경계·dry-run·원본 보존을 학습합니다. 이어서 [07-3. 계정·권한 위험 검토](07-secure-scripting/07-3-account-permission-review.md)에서 특수 비트·sudo·capability·변경 권한을 비교합니다. 점검 스크립트에도 배운 안전 설계를 적용합니다.
