@@ -4,7 +4,7 @@
 
 [전체 실습 ZIP 받기 — 노트북 23개](https://github.com/zxz3650/Bash-shell-programing/raw/refs/heads/master/downloads/all-labs.zip) · [처음 실행하는 방법](../PRACTICE.md)
 
-전체 자료 버전: `33ceac2e97e0` · 80.0 KiB
+전체 자료 버전: `c7d5704534cc` · 84.8 KiB
 
 ## 장별 다운로드
 
@@ -18,7 +18,7 @@
 | 04. 파일 입출력과 권한 | [ZIP 받기](https://github.com/zxz3650/Bash-shell-programing/raw/refs/heads/master/downloads/chapter-04.zip) | 파일·권한·파이프 → 의심 파일 조사 | `e1b9cb6cb225` | 7.5 KiB |
 | 05. 파이프라인과 텍스트 처리 | [ZIP 받기](https://github.com/zxz3650/Bash-shell-programing/raw/refs/heads/master/downloads/chapter-05.zip) | 텍스트 처리 → SSH 로그 분석 | `e46389b9bcda` | 7.5 KiB |
 | 06. 프로세스와 시스템 조사 | [ZIP 받기](https://github.com/zxz3650/Bash-shell-programing/raw/refs/heads/master/downloads/chapter-06.zip) | 안전한 시스템 조사 → 프로세스·네트워크 | `5af72447b9b9` | 8.6 KiB |
-| 07. 안전한 Shell Script | [ZIP 받기](https://github.com/zxz3650/Bash-shell-programing/raw/refs/heads/master/downloads/chapter-07.zip) | 안전한 시스템 조사 → 계정·권한·GTFOBins 검토 | `139957307e27` | 9.8 KiB |
+| 07. 안전한 Shell Script | [ZIP 받기](https://github.com/zxz3650/Bash-shell-programing/raw/refs/heads/master/downloads/chapter-07.zip) | 안전한 시스템 조사 → 계정·권한·GTFOBins 검토 | `5d459b90fa67` | 14.6 KiB |
 | 08. 시스템 자동화 | [ZIP 받기](https://github.com/zxz3650/Bash-shell-programing/raw/refs/heads/master/downloads/chapter-08.zip) | 자동화·테스트 → 지속성 흔적 검토 | `79098d7c385d` | 8.0 KiB |
 | 09. 테스트와 디버깅 | [ZIP 받기](https://github.com/zxz3650/Bash-shell-programing/raw/refs/heads/master/downloads/chapter-09.zip) | 오류·종료 상태 → 로그인 아티팩트 | `2ea3789be7d6` | 7.9 KiB |
 | 10. 프로그램 구조화 | [ZIP 받기](https://github.com/zxz3650/Bash-shell-programing/raw/refs/heads/master/downloads/chapter-10.zip) | 모듈·함수 → Journal·Audit | `a39e5c101028` | 8.7 KiB |

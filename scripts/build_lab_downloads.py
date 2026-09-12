@@ -92,10 +92,13 @@ def notebook_bytes(name: str) -> bytes:
 
 def start_here(title: str, names: list[str]) -> bytes:
     order = '\n'.join(f'{i}. `notebooks/{name}.ipynb`' for i, name in enumerate(names, 1))
+    platform_note = ('\n07장 GTFOBins 확장 실험은 Ubuntu 일반 사용자 환경이 필요합니다. '
+                     'root로 실행되는 Colab이나 macOS에서 이 확장 실험을 실행하지 않습니다.\n'
+                     if 'security-07-permissions' in names else '')
     return f'''# {title} — 실습 시작하기
 
 이 ZIP은 JupyterLab에서 실행하는 학습용 노트북 묶음입니다. 완성된 HTML 웹사이트가 아닙니다.
-노트북 안에 예제 코드와 합성 입력 자료가 포함되어 있습니다. 기본 문법 실습을 먼저 마친 뒤 보안 적용 실습을 진행합니다.
+노트북 안에 예제 코드와 합성 입력 자료가 포함되어 있습니다. 기본 문법 실습을 먼저 마친 뒤 보안 적용 실습을 진행합니다.{platform_note}
 
 ## 실행 순서
 

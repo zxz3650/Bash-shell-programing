@@ -3,6 +3,7 @@ import re
 from pathlib import Path
 import os
 from urllib.parse import urlsplit
+from gtfobins_lab import build_gtfobins_cells
 
 
 def perspective_section(root, page):
@@ -109,6 +110,8 @@ def build_security_notebooks(md, code, notebook, root):
                             '| Artifact·로깅 전제 | 확보한 자료와 필요한 기록 기능 |\n'
                             '| Blue Team 조사 | 정상 반례·추가 근거·수집 한계 |\n'
                             '| 탐지·완화 | 필요한 필드·오탐 사례·확인된 원인에 맞는 조치 |'))
+        if number == '07':
+            cells.extend(build_gtfobins_cells(md, code, root))
         cells += [md("## Checks\n\n각 STEP의 test는 고정 자료의 계산 결과를 검사합니다. 아래는 원본 내용 보존을 확인합니다. 실행 성공과 침해 판정은 다릅니다. 어떤 결과가 사실이고 어떤 결론이 가설인지 교안 질문에 답합니다."),
                   code("after = {name: hashlib.sha256((data / name).read_bytes()).hexdigest() for name in fixtures}\n"
                        "assert before == after\nprint('원본 내용 보존: PASS')\n"

@@ -53,6 +53,8 @@ jupyter book start jupyter-book
 
 설치가 어려운 학생은 [실습 목록](labs/README.md)의 **Colab에서 실행** 링크를 사용합니다. Colab에서도 각 노트북의 `%%bash` 셀을 위에서 아래로 실행할 수 있습니다.
 
+단, 07장 GTFOBins 확장 실험은 파일 접근 거부를 관찰하므로 **Ubuntu 일반 사용자**가 필요합니다. root로 실행되는 Colab 대신 VM/WSL에서 진행합니다.
+
 ## 실습 규칙
 
 1. 위에서 아래로 셀을 순서대로 실행합니다.
