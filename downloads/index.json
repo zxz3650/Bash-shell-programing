@@ -70,9 +70,9 @@
     {
       "file": "chapter-07.zip",
       "title": "07. 안전한 Shell Script",
-      "version": "5d459b90fa67",
-      "bytes": 14916,
-      "sha256": "6df473ab0e65a5ff6212a5e3268d78f001f6ce1301a3134d79e4497a25f0871a",
+      "version": "139957307e27",
+      "bytes": 10058,
+      "sha256": "3cc6ba59bba350416dab02dddc7eff3793515ca78ab5f4edd062aa8227d07ab3",
       "notebooks": [
         "06-system-inspection-secure-scripting",
         "security-07-permissions"
@@ -137,9 +137,9 @@
   "all": {
     "file": "all-labs.zip",
     "title": "Bash 전체 실습",
-    "version": "c7d5704534cc",
-    "bytes": 86802,
-    "sha256": "d33be8eb3b02bafbc80753335ac8ccf7180d88e4be736b2bf197ada8693e0caf",
+    "version": "33ceac2e97e0",
+    "bytes": 81940,
+    "sha256": "0e6565b6ca8a3678191a01b382166502f8cf8af7ce7392542bfa918122ea21ec",
     "notebooks": [
       "00-orientation-and-safety",
       "01-when-to-use-bash",
